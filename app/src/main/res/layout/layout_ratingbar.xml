@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+    <com.dazhukeji.douwu.view.RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:clickable="false"
+        android:gravity="center"
+        android:numStars="5"
+        app:starFill="@drawable/icon_select_star"
+        app:starHalf="@drawable/icon_unselect_star"
+        app:starImageSize="12dp"
+        app:starStep="3"
+        app:starcount="5"
+        app:starempty="@drawable/icon_unselect_star"
+        app:starpadding="5dp"
+        app:stepSize="Full"/>
+
+    <TextView
+        android:id="@+id/score_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3.0"
+        android:textColor="#ffced1da"
+        android:textSize="10sp" />
+</LinearLayout>

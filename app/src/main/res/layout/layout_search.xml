@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_color"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="15dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="15dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:alpha="0.5"
+        android:background="@drawable/shape_radius5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/icon_search" />
+
+        <com.dazhukeji.douwu.view.MyEditText
+            android:id="@+id/search_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@null"
+            android:hint="店名、舞种、拼音"
+            android:textColor="#ff666666"
+            android:textColorHint="#ff666666"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/search_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_search_bg"
+        android:gravity="center"
+        android:paddingStart="14dp"
+        android:paddingEnd="12dp"
+        android:text="搜索"
+        android:textColor="#ffdbdee7"
+        android:textSize="13sp" />
+</LinearLayout>

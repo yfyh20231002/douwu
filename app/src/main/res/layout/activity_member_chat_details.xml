@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_bars" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/headsRecyclerView"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:background="#212126"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/heads_item"
+        tools:itemCount="1"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chatInfoRecyclerView"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/chat_info_item"
+        tools:itemCount="2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/chat_recyclerView"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:paddingStart="8dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_chat_bg" />
+
+        <ImageView
+            android:id="@+id/sendImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_send" />
+
+    </LinearLayout>
+</LinearLayout>

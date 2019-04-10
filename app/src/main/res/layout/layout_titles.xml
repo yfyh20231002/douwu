@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/titles_recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/black"
+    android:overScrollMode="never"
+    android:paddingStart="13dp"
+    android:paddingEnd="13dp"
+    tools:itemCount="2"
+    tools:listitem="@layout/home_title_item" />

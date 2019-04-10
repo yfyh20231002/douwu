@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="22dp"
+    android:paddingBottom="21dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="售出topRock or Freeze课程"
+        android:textColor="#ffdbdee7"
+        android:textSize="12sp"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="余额 ￥5534.32"
+        android:textColor="#ff7c8292"
+        android:textSize="10sp"
+        />
+</LinearLayout>
+    <LinearLayout
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ ￥5534.32"
+            android:textColor="#fff1f3f7"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-09-14"
+            android:textColor="#ff7c8292"
+            android:textSize="10sp"
+            />
+    </LinearLayout>
+</RelativeLayout>

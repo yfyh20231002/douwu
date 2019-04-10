@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_bars" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="187dp"
+                android:src="@drawable/icon_course_banner" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#19181C"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/head_img"
+                    android:layout_width="57dp"
+                    android:layout_height="57dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:id="@+id/info_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@id/head_img"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="topRock or Freeze"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="小杰 17:00 - 20:00"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="10sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_difficulty_bg"
+                            android:padding="3dp"
+                            android:text="难度"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="9sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="中级进阶"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="96dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_course_details"
+                            android:paddingBottom="2dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="6dp"
+                            android:paddingTop="2dp"
+                            android:text="关注"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/shape_course_details"
+                            android:paddingBottom="2dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="6dp"
+                            android:paddingTop="2dp"
+                            android:text="取消收藏"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="26dp"
+                        android:text="524人购买"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#19181C"
+                android:orientation="vertical"
+                android:paddingEnd="31dp"
+                android:paddingStart="25dp"
+                android:paddingBottom="91dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="8dp"
+                    android:text="课程详情"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="53dp"
+                    android:layout_height="1dp"
+                    android:background="@drawable/icon_course_details_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="1.课前有氧运动，提升体能，燃烧脂肪；"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="2.训练学院通过肩、腰、胯部配合音乐进行律动；"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="3.培养学员对音乐的感知能力及创意思维，在节奏中融入生活的
+   点点滴滴，享受音乐并提升创造力。"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginTop="40dp"
+                    android:text="试看课程"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="53dp"
+                    android:layout_height="1dp"
+                    android:background="@drawable/icon_course_details_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginStart="25dp"
+                    android:orientation="vertical">
+
+                    <cn.jzvd.JzvdStd
+                        android:id="@+id/videoplayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="151dp"
+                        android:layout_marginTop="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[boerduo]"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="topRock or Freeze"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="47dp">
+
+                <TextView
+                    android:id="@+id/letterTv"
+                    android:drawablePadding="4dp"
+                    android:drawableStart="@drawable/icon_course_details_letter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="私信Ta"
+                    android:gravity="center"
+                    android:layout_marginStart="21dp"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="10sp"
+                    />
+                <TextView
+                    android:id="@+id/trySeeTv"
+                    android:drawablePadding="4dp"
+                    android:drawableStart="@drawable/icon_course_details_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="试看"
+                    android:layout_marginStart="17dp"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:layout_marginEnd="28dp"
+                    />
+                <LinearLayout
+                    android:id="@+id/pay_linearLayout"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@mipmap/ic_launcher"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/icon_rmb"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="已预约本节课课程"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="12sp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+    <CheckBox
+        android:id="@+id/titleCB"
+        android:button="@null"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_course_dance_type"
+        android:paddingBottom="3dp"
+        android:paddingEnd="6dp"
+        android:paddingStart="5dp"
+        android:paddingTop="3dp"
+        android:text="街舞"
+        android:textColor="#ffdbdee7"
+        android:textSize="11sp" />
+</FrameLayout>

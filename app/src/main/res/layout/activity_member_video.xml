@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_bars" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="19dp"
+        android:paddingEnd="27dp"
+        android:paddingStart="15dp"
+        android:paddingTop="14dp">
+
+        <ImageView
+            android:id="@+id/head_img"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:src="@drawable/icon_video_head_placeholder" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_toRightOf="@id/head_img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:drawableEnd="@drawable/icon_mine_sexbg"
+                android:drawablePadding="11dp"
+                android:text="How are you"
+                android:textColor="#fffefefe"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/contentTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Mksafj·卢屋街最强舞士"
+                android:textColor="#fffefefe"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_recyclerView"
+        android:overScrollMode="never"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/video_item"/>
+</LinearLayout>

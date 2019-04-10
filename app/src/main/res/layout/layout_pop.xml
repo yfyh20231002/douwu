@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="#19181C"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="7dp"
+    android:paddingStart="6dp"
+    android:paddingBottom="7dp">
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawablePadding="2dp"
+        android:drawableStart="@drawable/icon_time"
+        android:text="时间"
+        android:textColor="#ffeaeaea"
+        android:textSize="10sp" />
+    <TextView
+        android:id="@+id/collect_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawablePadding="2dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/icon_star"
+        android:text="收藏度"
+        android:textColor="#ffeaeaea"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/video_tv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawablePadding="2dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/icon_star"
+        android:text="收藏度"
+        android:textColor="#ffeaeaea"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/lastTv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawablePadding="2dp"
+        android:layout_marginTop="12dp"
+        android:drawableStart="@drawable/icon_star"
+        android:text="收藏度"
+        android:textColor="#ffeaeaea"
+        android:textSize="10sp" />
+</LinearLayout>

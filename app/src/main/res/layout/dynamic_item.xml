@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="19dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="157dp"
+        android:layout_height="118dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="dancing 拉丁"
+        android:textColor="#ffafb3c0"
+        android:textSize="10sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jio·小杰"
+            android:textColor="#ff818596"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/icon_video_love"
+            android:text="256"
+            android:textColor="#ffafb3bf"
+            android:textSize="10sp" />
+    </RelativeLayout>
+</LinearLayout>

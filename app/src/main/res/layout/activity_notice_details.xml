@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="27dp"
+                android:rotation="180"
+                android:onClick="onBeBack"
+                android:src="@drawable/icon_right_arrow" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_logo"
+                    android:maxHeight="86dp"
+                    android:maxWidth="114dp"/>
+                <TextView
+                    android:layout_marginTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="乐舞平台"
+                    android:textColor="#ffced1da"
+                    android:textSize="25sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginStart="31dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天津市乐舞舞蹈机构平台"
+                    android:textColor="#ffced1da"
+                    android:textSize="11sp"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="营业时间："
+                        android:textColor="#ffced1da"
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="早上 09:00 - 下午18:00"
+                        android:textColor="#ff939396"
+                        android:textSize="10sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客服电话："
+                        android:textColor="#ffced1da"
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="022-15682141568"
+                        android:textColor="#ff939396"
+                        android:textSize="10sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="门店地址："
+                        android:textColor="#ffced1da"
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AIJ·天津 南开森淼店 教学基地"
+                        android:textColor="#ff939396"
+                        android:textSize="10sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="舞种类型："
+                        android:textColor="#ffced1da"
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MV舞蹈 编舞 中国风"
+                        android:textColor="#ff939396"
+                        android:textSize="10sp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:text="平台介绍"
+            android:layout_marginTop="35dp"
+            android:gravity="center"
+            android:textColor="#ffced1da"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="video introduction"
+            android:textColor="#ffced1da"
+            android:textSize="10sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginTop="15dp"
+            android:text="零下舞度街舞俱乐部隶属于聆夏文化传播有限公司，我们力图为每位街舞爱好者提供优质的教学服务和教学环境，并竭力为更多的街舞爱好者提供舒适的街舞交流平台。"
+            android:textColor="#ffced1da"
+            android:textSize="10sp"
+            />
+        <TextView
+            android:text="图片介绍"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:textColor="#ffced1da"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="video introduction"
+            android:textColor="#ffced1da"
+            android:textSize="10sp"
+            />
+        <ImageView
+            android:maxWidth="269dp"
+            android:maxHeight="151dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="53dp"
+            android:layout_marginEnd="54dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="53dp"
+            android:src="@drawable/icon_douwu_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

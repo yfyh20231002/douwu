@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/icon_login_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="46dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="56dp"
+            android:src="@drawable/icon_login_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/shape_white_radius3"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:drawablePadding="15dp"
+                android:drawableStart="@drawable/icon_login_phone"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                android:text="手机号"
+                android:textColor="#ffa1a1a1"
+                android:textSize="12sp" />
+
+            <com.dazhukeji.douwu.view.MyEditText
+                android:id="@+id/phoneEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="#ffd7d4d4"
+                android:textColorHint="#ffd7d4d4"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/codeLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            android:background="@drawable/shape_white_radius3"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:drawablePadding="15dp"
+                android:drawableStart="@drawable/icon_login_code"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="验证码"
+                android:gravity="center_vertical"
+                android:textColor="#ffa1a1a1"
+                android:textSize="12sp" />
+
+            <com.dazhukeji.douwu.view.MyEditText
+                android:id="@+id/codeEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="38dp"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:textColor="#ffd7d4d4"
+                android:textColorHint="#ffd7d4d4"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/sendCodeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送验证码"
+                android:layout_marginEnd="5dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:background="@drawable/icon_login_code_button_bg"
+                android:textColor="#ffd7d4d4"
+                android:textSize="8sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_white_radius3"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/passwordTv"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:drawablePadding="18dp"
+                android:drawableStart="@drawable/icon_login_password"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="密码"
+                android:gravity="center_vertical"
+                android:textColor="#ffa1a1a1"
+                android:textSize="12sp" />
+
+            <com.dazhukeji.douwu.view.MyEditText
+                android:id="@+id/passwordEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:background="@null"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:textColor="#ffd7d4d4"
+                android:textColorHint="#ffd7d4d4"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/forgetTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:text="忘记密码?"
+            android:textColor="#ff37c8f8"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/confirmTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/icon_button_bg"
+            android:gravity="center"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp"
+            android:text="立即登录"
+            android:textColor="#ffdbdee7"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tipTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="34dp"
+            android:text="您还没有乐舞账号？立即注册"
+            android:textColor="#ffa1a1a1"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+</RelativeLayout>

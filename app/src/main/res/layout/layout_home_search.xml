@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#7f000000"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
+
+
+    <TextView
+        android:id="@+id/location_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:drawableEnd="@drawable/icon_arrow"
+        android:drawablePadding="3dp"
+        android:text="天津"
+        android:textColor="#ffffffff"
+        android:textSize="11sp" />
+
+    <LinearLayout
+        android:layout_width="259dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="13dp"
+        android:layout_toRightOf="@id/location_tv"
+        android:alpha="0.5"
+        android:background="@drawable/shape_for_home_search"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="11dp"
+            android:src="@drawable/icon_search" />
+
+        <com.dazhukeji.douwu.view.MyEditText
+            android:id="@+id/searchEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textColor="#ff666666"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/infoImg"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="14dp"
+        android:src="@drawable/icon_info" />
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="13dp"
+    android:layout_marginBottom="13dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:src="@drawable/icon_video_head_placeholder"
+        />
+    <ImageView
+        android:src="@drawable/icon_chat_point"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content" />
+</FrameLayout>

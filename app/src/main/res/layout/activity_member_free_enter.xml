@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    android:background="#7f000000">
+
+    <LinearLayout
+        android:background="@drawable/shape_white_radius10"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="271dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="免费入驻"
+            android:layout_marginTop="20dp"
+            android:textColor="#ff333333"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:layout_marginTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="免费成为机构or教师"
+            android:textColor="#ff333333"
+            android:textSize="11sp"
+            />
+        <LinearLayout
+            android:id="@+id/orgLinearLayout"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="19dp"
+                android:src="@drawable/icon_free_enter_org"
+                android:layout_width="54dp"
+                android:layout_height="54dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成为机构"
+                android:layout_marginTop="3dp"
+                android:textColor="#ff333333"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teacherLinearLayout"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon_free_enter_teacher"
+                android:layout_width="54dp"
+                android:layout_height="54dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成为教师"
+                android:layout_marginTop="3dp"
+                android:textColor="#ff333333"
+                android:textSize="12sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

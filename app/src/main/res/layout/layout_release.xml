@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/video_img"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:visibility="gone"
+        android:src="@drawable/icon_release_video" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/pic_img"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:visibility="gone"
+            android:src="@drawable/icon_release_pic" />
+
+        <ImageView
+            android:id="@+id/lewu_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/icon_lewu" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/music_img"
+        android:layout_width="59dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="59dp"
+        android:visibility="gone"
+        android:src="@drawable/icon_release_music" />
+</LinearLayout>

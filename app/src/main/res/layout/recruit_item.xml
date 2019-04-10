@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_black_radius5"
+    android:layout_marginTop="15dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:paddingStart="9dp"
+    android:paddingTop="11dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="13dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_zhaopin"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/recruitTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="零下舞度聘请函"
+            android:textColor="#ffdbdee7"
+            android:textSize="14sp"
+            />
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="舞种需求："
+                android:textColor="#ffdbdee7"
+                android:textSize="10sp"
+                />
+            <TextView
+                android:id="@+id/recruitTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="134dp"
+                android:text="少儿街舞，Urban dance高级编舞，popping(机械舞）Hiphop（律动舞），Jazz 流行爵士舞..."
+                android:textColor="#ffdbdee7"
+                android:textSize="10sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/see_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="right"
+        android:textColor="#ffdbdee7"
+        android:textSize="15sp"
+        android:drawablePadding="8dp"
+        android:drawableEnd="@drawable/icon_right_arrow"
+        />
+
+</RelativeLayout>

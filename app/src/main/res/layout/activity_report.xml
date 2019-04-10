@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#7f000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:background="@drawable/shape_report_bg"
+    android:layout_width="match_parent"
+    android:layout_marginStart="74dp"
+    android:layout_marginEnd="74dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="视频举报"
+        android:layout_marginTop="21dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffced1da"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginTop="48dp"
+        android:text="视频有恶意行为，违规行为即可举报作者！"
+        android:textColor="#ffced1da"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:layout_marginTop="42dp"
+        android:layout_marginStart="9dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="额外注释(仅限200字)："
+        android:textColor="#ffced1da"
+        android:textSize="12sp"
+        />
+
+    <com.dazhukeji.douwu.view.MyEditText
+        android:id="@+id/reasonEdit"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/shape_report_edit_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入该视频的违规行为"
+        android:padding="10dp"
+        android:textColorHint="#ff666666"
+        android:textColor="#ff666666"
+        android:gravity="top"
+        android:textSize="12sp"
+        android:minHeight="91dp"/>
+    <TextView
+        android:id="@+id/commitTv"
+        android:background="@drawable/icon_report_button_bg"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交举报"
+        android:gravity="center"
+        android:textColor="#ffdbdee7"
+        android:textSize="14sp"
+        android:layout_marginBottom="21dp"/>
+</LinearLayout>
+
+</FrameLayout>

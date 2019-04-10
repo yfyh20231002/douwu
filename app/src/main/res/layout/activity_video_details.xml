@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_bars" />
+    <!--<android.support.v4.widget.NestedScrollView
+        android:overScrollMode="never"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+        <!--<LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">-->
+            <cn.jzvd.JzvdStd
+                android:id="@+id/videoplayer"
+                android:layout_width="match_parent"
+                android:layout_height="211dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/typeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[boerduo]"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/nameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="topRock or Freeze"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/collectLayout"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/collectTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:drawableStart="@drawable/icon_red_star"
+                        android:text="收藏"
+                        android:visibility="invisible"
+                        android:gravity="center"
+                        android:textColor="#ffe45487"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/cancelCollectTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:drawableStart="@drawable/icon_uncollect"
+                        android:text="取消收藏"
+                        android:visibility="invisible"
+                        android:gravity="center"
+                        android:textColor="#ffced1da"
+                        android:textSize="11sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/reportTv"
+                    android:layout_toLeftOf="@id/collectLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="4dp"
+                    android:drawableStart="@drawable/icon_report"
+                    android:text="举报"
+                    android:gravity="center"
+                    android:layout_marginEnd="9dp"
+                    android:textColor="#ffced1da"
+                    android:textSize="11sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="30dp"
+                android:text="评论"
+                android:textColor="#ffe4e4e4"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/chat_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:overScrollMode="never"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/chat_item" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.dazhukeji.douwu.view.MyEditText
+                        android:id="@+id/contentEdit"
+                        android:paddingStart="8dp"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_chat_bg" />
+
+                    <ImageView
+                        android:id="@+id/sendImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/icon_send" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+       <!-- </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>-->
+</LinearLayout>

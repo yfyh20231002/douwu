@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_bars" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:background="#212126"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="19dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="图片介绍"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/picImg"
+                        android:layout_width="93dp"
+                        android:layout_height="93dp"
+                        android:layout_marginTop="23dp"
+                        android:src="@drawable/icon_modify_head" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="19dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="试看视频"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/videoImg"
+                        android:layout_width="93dp"
+                        android:layout_height="93dp"
+                        android:layout_marginTop="23dp"
+                        android:src="@drawable/icon_modify_head" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程名称"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/courseNameEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:background="@null"
+                    android:hint="请输入课程名称"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程导师"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/courseTeacherEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:background="@null"
+                    android:hint="请输入授课教师"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预约时间"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/alwaysRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawablePadding="6dp"
+                        android:drawableStart="@drawable/selector_choose_date"
+                        android:text="长期有效"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/customRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="29dp"
+                        android:button="@null"
+                        android:drawablePadding="6dp"
+                        android:drawableStart="@drawable/selector_choose_date"
+                        android:text="自定义日期"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="12sp" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="起始日期"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/startLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/startYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="2018"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="年"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/startMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="12"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="月"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/startDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="12"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="日"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="结束日期"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/endLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/endYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="2018"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="年"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/endMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="12"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="月"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/endDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_addcourse_time"
+                        android:drawableEnd="@drawable/icon_pull_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="4dp"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:text="30"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="日"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="vertical"
+                android:paddingBottom="14dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="13dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程简介"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/courseEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="请填写老师简介"
+                    android:minHeight="90dp"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="舞种类型"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <!--<LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:button="@null"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="街舞"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="编舞"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="中国风"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="肚皮舞"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="古典舞"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="拽步舞"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/selector_course_dance_type"
+                            android:paddingBottom="3dp"
+                            android:paddingEnd="6dp"
+                            android:paddingStart="5dp"
+                            android:paddingTop="3dp"
+                            android:text="儿童舞蹈"
+                            android:textColor="#ffdbdee7"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>-->
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/titles_recyclerView"
+                    android:layout_width="match_parent"
+                    android:overScrollMode="never"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程难度"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/juniorRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_course_difficulty"
+                        android:button="@null"
+                        android:checked="true"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="3dp"
+                        android:text="初级进阶"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="11sp" />
+
+                    <RadioButton
+                        android:id="@+id/middleRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/selector_course_difficulty"
+                        android:button="@null"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="3dp"
+                        android:text="中级进阶"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="11sp" />
+
+                    <RadioButton
+                        android:id="@+id/seniorRB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/selector_course_difficulty"
+                        android:button="@null"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="3dp"
+                        android:text="高级进阶"
+                        android:textColor="#ffdbdee7"
+                        android:textSize="11sp" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程价格"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/coursePriceEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:background="@null"
+                    android:hint="请输入课程价格"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/confirmTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/icon_button_bg"
+                android:gravity="center"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:text="提交添加"
+                android:textColor="#ffdbdee7"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

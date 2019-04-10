@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="25dp"
+    android:paddingBottom="10dp"
+    android:background="#212126">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/back_img"
+            android:onClick="onBeBack"
+            android:src="@drawable/icon_right_arrow"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="标题"
+            android:textColor="#fffefefe"
+            android:textSize="18sp"
+            android:layout_centerInParent="true" />
+        <FrameLayout
+            android:id="@+id/info_frameLayout"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="9dp"
+                android:src="@drawable/icon_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:background="@drawable/shape_red"
+                android:text="4"
+                android:layout_gravity="right|top"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+        <TextView
+            android:id="@+id/editTv"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:text="+"
+            android:layout_centerVertical="true"
+            android:textColor="#ffb1b1b2"
+            android:textSize="30sp"
+            />
+        <ImageView
+            android:id="@+id/rightImg"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

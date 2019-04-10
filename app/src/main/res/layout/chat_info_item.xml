@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/leftLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:src="@drawable/icon_video_head_placeholder" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/icon_chat_left"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="3dp"
+            android:maxWidth="208dp"
+            android:paddingEnd="9dp"
+            android:paddingStart="15dp"
+            android:text="最近这么样，明天又要连练来了"
+            android:textColor="#fffafafa"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rightLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/icon_chat_right"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="3dp"
+            android:maxWidth="208dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="10dp"
+            android:text="最近这么样，明天又要连练来了"
+            android:textColor="#fffafafa"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:src="@drawable/icon_video_head_placeholder" />
+    </LinearLayout>
+</LinearLayout>

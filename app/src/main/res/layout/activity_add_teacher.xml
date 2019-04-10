@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_bars" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="老师名称"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/nameEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:background="@null"
+                    android:hint="请输入老师昵称"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作时间"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/timeEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:background="@null"
+                    android:hint="请输入工作时间(如09:00 ~ 18:00)"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="horizontal"
+                android:paddingBottom="23dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/phoneEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:background="@null"
+                    android:hint="请输入联系电话"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="vertical"
+                android:paddingBottom="14dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="13dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="老师介绍"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/teacherBriefEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="请填写老师简介"
+                    android:minHeight="90dp"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="19dp"
+                android:background="#212126"
+                android:orientation="vertical"
+                android:paddingBottom="14dp"
+                android:paddingEnd="29dp"
+                android:paddingStart="36dp"
+                android:paddingTop="13dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="舞种类型"
+                    android:textColor="#ffdbdee7"
+                    android:textSize="14sp" />
+
+                <com.dazhukeji.douwu.view.MyEditText
+                    android:id="@+id/danceTypeEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="请填写您的舞种类型"
+                    android:minHeight="90dp"
+                    android:textColor="#ff999999"
+                    android:textColorHint="#ff999999"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/confirmTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/icon_button_bg"
+                android:gravity="center"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:text="提交信息"
+                android:textColor="#ffdbdee7"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

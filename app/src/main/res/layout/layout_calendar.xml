@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/bg_color">
+
+    <include layout="@layout/layout_bars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/monthTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            tools:text="10月"
+            android:textColor="#ffdbdee7"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/yearTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2018年"
+            android:layout_marginStart="10dp"
+            android:textColor="#ffdbdee7"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color"
+        app:calendar_padding="10dp"
+        app:current_day_text_color="#ffdbdee7"
+        app:current_month_lunar_text_color="#ffdbdee7"
+        app:current_month_text_color="#ffdbdee7"
+        app:min_year="2004"
+        app:month_view="com.dazhukeji.douwu.view.SingleMonthView"
+        app:month_view_show_mode="mode_only_current"
+        app:other_month_text_color="#ffdbdee7"
+        app:scheme_lunar_text_color="#ffdbdee7"
+        app:scheme_text="假"
+        app:scheme_text_color="#ffdbdee7"
+        app:select_mode="single_mode"
+        app:selected_lunar_text_color="#ffdbdee7"
+        app:selected_text_color="#ffdbdee7"
+        app:week_background="@color/bg_color"
+        app:week_text_color="#ffdbdee7"
+        app:week_view="com.dazhukeji.douwu.view.SingleWeekView"
+        app:year_view_day_text_color="#ffdbdee7"
+        app:year_view_day_text_size="9sp"
+        app:year_view_month_text_color="#ffdbdee7"
+        app:year_view_month_text_size="20sp"
+        app:year_view_scheme_color="#f17706" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_show" />
+    </RelativeLayout>
+
+
+</LinearLayout>
