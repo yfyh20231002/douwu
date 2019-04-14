@@ -47,10 +47,12 @@
             android:id="@+id/name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/head_img"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/head_img"
-            android:text="L-- start"
+            android:text="艰苦艰苦拮抗剂"
+            android:maxLines="2"
+            android:maxWidth="60dp"
             android:textColor="#ffe2e2e2"
             android:textSize="12sp" />
 

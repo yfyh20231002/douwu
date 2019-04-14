@@ -144,7 +144,7 @@ public class TeacherAty extends BaseAty implements OrganizationTeacherContract.V
         if (teacher != null) {
             mTeacherBeanList.addAll(teacher);
         }
-        if (mTeacherBeanList.size() > 0) {
+        if (mTeacherBeanList.size() >= 0) {
             mTeacherListAdapter = new TeacherListAdapter(R.layout.teacher_item, mTeacherBeanList, mContext);
             teacherRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override

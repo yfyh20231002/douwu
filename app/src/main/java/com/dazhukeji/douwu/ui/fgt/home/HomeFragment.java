@@ -30,6 +30,7 @@ import com.dazhukeji.douwu.api.OnItemClickListener;
 import com.dazhukeji.douwu.base.BaseFgt;
 import com.dazhukeji.douwu.bean.home.HomeIndexBean;
 import com.dazhukeji.douwu.bean.publicBean.DanceTypeBean;
+import com.dazhukeji.douwu.bean.publicBean.DistrictBean;
 import com.dazhukeji.douwu.bean.publicBean.VideoBean;
 import com.dazhukeji.douwu.loader.BannerLoader;
 import com.dazhukeji.douwu.manager.RecyclerViewManager;
@@ -71,6 +72,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
@@ -112,7 +114,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
     private List<DanceTypeBean.DataBean> titleList = new ArrayList<>();
     private List<String> imagesList = new ArrayList<>();
     private List<VideoBean> mVideoBeanList = new ArrayList<>();
-//    private List<DistrictBean> mDistrictBeanList=new ArrayList<>();
+    private List<DistrictBean> mDistrictBeanList=new ArrayList<>();
 
 
     private HomeClassifyAdapter mClassifyAdapter;
@@ -218,6 +220,39 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
 //        mDanceTypePresenter = new DanceTypePresenter();
 //        mDanceTypePresenter.attachView(this,mContext);
 //        mDanceTypePresenter.postDanceTypeSelect();
+        chooseCity();
+    }
+
+    private void chooseCity() {
+        ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
+        Observable<ResponseBody> observable = apiService.postArea();
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<ResponseBody>() {
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        Map<String, String> map = Config.getMap(responseBody);
+                        ArrayList<Map<String, String>> arrayList = JSONUtils.parseKeyAndValueToMapList(map.get("data"));
+                        if (arrayList != null && arrayList.size() > 0) {
+                            for (int i = 0; i < arrayList.size(); i++) {
+                                DistrictBean districtBean = new DistrictBean();
+                                districtBean.setDistrict_id(Integer.parseInt(arrayList.get(i).get("district_id")));
+                                districtBean.setDistrict_name(arrayList.get(i).get("district_name"));
+                                mDistrictBeanList.add(districtBean);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -282,7 +317,9 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.location_tv:
-//                setCity();
+                if (mDistrictBeanList.size()>0){
+                    setCity();
+                }
                 break;
             case R.id.infoImg:
                 startActivity(MemberChatAty.class);
@@ -324,18 +361,18 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
             musicImg.setVisibility(View.GONE);
         } else {
             videoImg.setVisibility(View.VISIBLE);
-            picImg.setVisibility(View.VISIBLE);
+            picImg.setVisibility(View.GONE);
             musicImg.setVisibility(View.VISIBLE);
         }
     }
 
     private void setCity() {
         List<City> cityList = new ArrayList<>();
-//        for (int i = 0; i < mDistrictBeanList.size(); i++) {
-//            DistrictBean districtBean = mDistrictBeanList.get(i);
-//            City city=new City(districtBean.getDistrict_name(),"","",String.valueOf(districtBean.getDistrict_id()));
-//            cityList.add(city);
-//        }
+        for (int i = 0; i < mDistrictBeanList.size(); i++) {
+            DistrictBean districtBean = mDistrictBeanList.get(i);
+            City city=new City(districtBean.getDistrict_name(),"","",String.valueOf(districtBean.getDistrict_id()));
+            cityList.add(city);
+        }
         CityPicker.getInstance()
                 .setFragmentManager(getFragmentManager())    //此方法必须调用
                 .enableAnimation(true)    //启用动画效果
