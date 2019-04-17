@@ -1,5 +1,7 @@
 package com.dazhukeji.douwu.ui.aty.home;
 
+import android.view.View;
+
 import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
@@ -46,8 +48,17 @@ public class ReportAty extends BaseAty {
 
     }
 
-    @OnClick(R.id.commitTv)
-    public void onViewClicked() {
+    @OnClick({R.id.rootLayout,R.id.commitTv})
+    public void onClick(View view){
+        int id = view.getId();
+        if (id == R.id.rootLayout){
+            finish();
+        }else if (id == R.id.commitTv){
+            report();
+        }
+    }
+
+    private void report() {
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("file_id", mFile_id);

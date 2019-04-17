@@ -331,6 +331,7 @@ public class VideoDetailsAty extends BaseAty {
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         Map<String, String> map = Config.getMap(responseBody);
+                        contentEdit.setText("");
                         ToastUtils.showToast(map.get("msg"));
                         if (map.get("code").equals("1")) {
                             initData();
