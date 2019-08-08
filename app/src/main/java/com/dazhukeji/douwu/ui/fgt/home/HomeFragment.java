@@ -334,12 +334,14 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 setPic();
                 bundle.putString("type", "video");
                 bundle.putString("from", "home");
+                bundle.putString("district_id",district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
             case R.id.pic_img:
                 setPic();
                 bundle.putString("type", "image");
                 bundle.putString("from", "home");
+                bundle.putString("district_id",district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
             case R.id.lewu_img:
@@ -349,6 +351,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 setPic();
                 bundle.putString("type", "music");
                 bundle.putString("from", "home");
+                bundle.putString("district_id",district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
         }

@@ -1,7 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +22,7 @@ import com.dazhukeji.douwu.contract.DanceTypeContract;
 import com.dazhukeji.douwu.contract.upload.UpLoadContract;
 import com.dazhukeji.douwu.presenter.DanceTypePresenter;
 import com.dazhukeji.douwu.presenter.UpLoadPresenter;
+import com.dazhukeji.douwu.utils.MyUtils;
 import com.dazhukeji.douwu.view.MyEditText;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -85,6 +85,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
      * org  机构中心
      */
     private String mFrom;
+    private String mDistrictId;
 
     @Override
     public int getLayoutId() {
@@ -95,6 +96,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
     public void initView() {
         mType = getIntent().getStringExtra("type");
         mFrom = getIntent().getStringExtra("from");
+        mDistrictId = getIntent().getStringExtra("district_id");
         if ("video".equals(mType)) {
             txtTitle.setText("发布视频");
             typeTv.setText("上传视频");
@@ -147,33 +149,32 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).into(picImg);
-//                    mUpLoadPresenter.postPic("headImg", file);
-//                }
-//            } else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(picImg);
+                    //mUpLoadPresenter.postPic("headImg", file);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postVideo("video", file);
+            File file = new File(MyUtils.getRealPath(PublishVideoAty.this,data));
+            mUpLoadPresenter.postFile("video",file,"1");
         }
 
         if (resultCode == RESULT_OK && data != null && requestCode == Config.MUSIC_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postMusic("music", file);
+            File file = new File(MyUtils.getRealPath(PublishVideoAty.this,data));
+            mUpLoadPresenter.postFile("music",file,"2");
         }
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -225,9 +226,9 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
                 }
                 break;
             case R.id.picImg:
-//                setImagePicker();
-//                Intent intent = new Intent(this, ImageGridActivity.class);
-//                startActivityForResult(intent, Config.IMAGE_PICKER);
+                setImagePicker();
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, Config.IMAGE_PICKER);
                 break;
             case R.id.confirmTv:
                 confirm();
@@ -239,7 +240,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> map = new HashMap<>();
         map.put("user_token", ApiConfig.getToken());
-        map.put("district_id", "");
+        map.put("district_id", mDistrictId);
         map.put("file_cover", imgPath);
         map.put("file_name", titleEdit.getContent());
         //file_type
@@ -326,4 +327,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
             }
         }
     }
+
+
+
 }

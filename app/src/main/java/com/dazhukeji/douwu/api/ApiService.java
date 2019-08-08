@@ -11,6 +11,7 @@ import com.dazhukeji.douwu.bean.home.organization.OrganizationListBean;
 import com.dazhukeji.douwu.bean.home.teacher.TeacherListBean;
 import com.dazhukeji.douwu.bean.home.video.PlayVideoBean;
 import com.dazhukeji.douwu.bean.home.video.SplendidVideoBean;
+import com.dazhukeji.douwu.bean.mine.AffirmUpdateBean;
 import com.dazhukeji.douwu.bean.mine.member.UserCollectCurriculumBean;
 import com.dazhukeji.douwu.bean.mine.member.UserCollectVideosBean;
 import com.dazhukeji.douwu.bean.mine.org.OrgInvitationFindBean;
@@ -31,7 +32,6 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 /**
@@ -90,6 +90,11 @@ public interface ApiService {
     /**
      * 上传接口
      */
+
+    @Multipart
+    @POST("Upload/upload_file.html")
+    Observable<Response> postUploadFile(@Part List<MultipartBody.Part> partLis);
+
     @Multipart
     @POST("Upload/upload_image.html")
     Observable<Response> postUploadImage(@Part List<MultipartBody.Part> partLis);
@@ -289,9 +294,12 @@ public interface ApiService {
      * 合作洽谈
      */
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
+//    @POST("index/platform.html")
+//    Observable<BaseBean> postPlatform(@FieldMap Map<String, String> map);
+
     @POST("index/platform.html")
-    Observable<BaseBean> postPlatform(@FieldMap Map<String, String> map);
+    Observable<ResponseBody> postPlatform();
 
     /**
      * 首页上传
@@ -337,7 +345,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("user/affirm_update.html")
-    Observable<BaseBean> postAffirmUpdate(@FieldMap Map<String, RequestBody> map);
+    Observable<AffirmUpdateBean> postAffirmUpdate(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST("user/user_collect_curriculum.html")

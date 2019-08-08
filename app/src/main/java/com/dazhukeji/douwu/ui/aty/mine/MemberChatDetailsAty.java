@@ -1,17 +1,24 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.adapter.ChatInfoAdpter;
 import com.dazhukeji.douwu.base.BaseAty;
 import com.dazhukeji.douwu.manager.RecyclerViewManager;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.api.BasicCallback;
 
 /**
  * 创建者：zhangyunfei
@@ -22,13 +29,17 @@ public class MemberChatDetailsAty extends BaseAty {
 
     @BindView(R.id.txt_title)
     TextView txtTitle;
-//    @BindView(R.id.headsRecyclerView)
-//    RecyclerView headsRecyclerView;
+    //    @BindView(R.id.headsRecyclerView)
+    //    RecyclerView headsRecyclerView;
     @BindView(R.id.chatInfoRecyclerView)
     RecyclerView chatInfoRecyclerView;
+    @BindView(R.id.contentEdit)
+    EditText contentEdit;
 
     private RecyclerViewManager mRecyclerViewManager;
-    private List<Object> mList;
+    private List<Message> mList;
+    private Conversation mConversation;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_member_chat_details;
@@ -36,26 +47,31 @@ public class MemberChatDetailsAty extends BaseAty {
 
     @Override
     public void initView() {
-        txtTitle.setText("How are you doing");
-        mList=new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            mList.add(new Object());
-        }
-//        mRecyclerViewManager = new RecyclerViewManager(headsRecyclerView);
-//        mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
-//        headsRecyclerView.setAdapter(new ChatHeadsAdapter(R.layout.heads_item,mList));
-//        headsRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-//            @Override
-//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//                super.getItemOffsets(outRect, view, parent, state);
-//                if (parent.getChildAdapterPosition(view)!=state.getItemCount()-1){
-//                    outRect.right= DisplayHelper.dp2px(mContext,17);
-//                }
-//            }
-//        });
+//        txtTitle.setText("How are you doing");
+//        mList = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            mList.add(new Object());
+//        }
+        mConversation = (Conversation) getIntent().getSerializableExtra("Conversation");
+        //        mRecyclerViewManager = new RecyclerViewManager(headsRecyclerView);
+        //        mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
+        //        headsRecyclerView.setAdapter(new ChatHeadsAdapter(R.layout.heads_item,mList));
+        //        headsRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+        //            @Override
+        //            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        //                super.getItemOffsets(outRect, view, parent, state);
+        //                if (parent.getChildAdapterPosition(view)!=state.getItemCount()-1){
+        //                    outRect.right= DisplayHelper.dp2px(mContext,17);
+        //                }
+        //            }
+        //        });
         mRecyclerViewManager = new RecyclerViewManager(chatInfoRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.VERTICAL);
-        chatInfoRecyclerView.setAdapter(new ChatInfoAdpter(R.layout.chat_info_item,mList));
+        mList = mConversation.getAllMessage();
+        if (null != mList && mList.size()>0){
+            chatInfoRecyclerView.setAdapter(new ChatInfoAdpter(R.layout.chat_info_item, mList));
+        }
+
     }
 
     @Override
@@ -63,4 +79,27 @@ public class MemberChatDetailsAty extends BaseAty {
 
     }
 
+    @OnClick(R.id.sendImg)
+    public void onViewClicked() {
+        String content = contentEdit.getText().toString();
+        if (!StringUtils.isEmpty(content)){
+            Message message = Message.fromJson(content);
+            message.setOnSendCompleteCallback(new BasicCallback() {
+                @Override
+                public void gotResult(int responseCode, String responseDesc) {
+                    if (responseCode == 0) {
+                        //消息发送成功
+                        Toast.makeText(MemberChatDetailsAty.this, "消息发送成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //消息发送失败
+                        Toast.makeText(MemberChatDetailsAty.this, "消息发送失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            JMessageClient.sendMessage(message);
+        }else {
+            Toast.makeText(this, "发送内容不能为空", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

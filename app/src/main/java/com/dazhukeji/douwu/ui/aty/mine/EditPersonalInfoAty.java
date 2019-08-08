@@ -77,9 +77,9 @@ public class EditPersonalInfoAty extends BaseAty<MineUpdatePresenter> implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.head_img:
-//                setImagePicker();
-//                Intent intent = new Intent(this, ImageGridActivity.class);
-//                startActivityForResult(intent, Config.IMAGE_PICKER);
+                setImagePicker();
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, Config.IMAGE_PICKER);
                 break;
             case R.id.boy_tv:
                 sex = "boy";
@@ -153,25 +153,26 @@ public class EditPersonalInfoAty extends BaseAty<MineUpdatePresenter> implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size()>0){
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
-//                    mUpLoadPresenter.postPic("headImg",file);
-//                }
-//            } else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size()>0){
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
+                    //mUpLoadPresenter.postPic("headImg",file);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
     public void uploadSuccess(String channel, String path) {
-//        if (channel.equals("headImg")){
-//            mHeadPath = path;
-//        }
+        if (channel.equals("headImg")){
+            mHeadPath = path;
+        }
     }
 }

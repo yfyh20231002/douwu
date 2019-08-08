@@ -1,7 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +19,7 @@ import com.dazhukeji.douwu.contract.mine.member.MineOrgStatusUpgradeContract;
 import com.dazhukeji.douwu.contract.upload.UpLoadContract;
 import com.dazhukeji.douwu.presenter.UpLoadPresenter;
 import com.dazhukeji.douwu.presenter.mine.member.MineOrgStatusUpgradePresenter;
-import com.dazhukeji.douwu.presenter.mine.member.MineTeacherStatusUpgradePresenter;
+import com.dazhukeji.douwu.utils.MyUtils;
 import com.dazhukeji.douwu.view.MyEditText;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -48,7 +47,7 @@ import okhttp3.ResponseBody;
  * 创建时间：2018/11/26 13:57
  * 功能描述：成为教师
  */
-public class BeComeTeacherAty extends BaseAty<MineTeacherStatusUpgradePresenter> implements MineOrgStatusUpgradeContract.View, UpLoadContract.View {
+public class BeComeTeacherAty extends BaseAty<MineOrgStatusUpgradePresenter> implements MineOrgStatusUpgradeContract.View, UpLoadContract.View {
     @BindView(R.id.txt_title)
     TextView txtTitle;
     @BindView(R.id.headImg)
@@ -99,13 +98,13 @@ public class BeComeTeacherAty extends BaseAty<MineTeacherStatusUpgradePresenter>
     @OnClick({R.id.headImg, R.id.chooseLayout, R.id.videoImg, R.id.coverImg, R.id.confirmTv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-//            case R.id.headImg:
-//                pickerPhoto(Config.IMAGE_PICKER);
-//                break;
+            case R.id.headImg:
+                pickerPhoto(Config.IMAGE_PICKER);
+                break;
             case R.id.chooseLayout:
                 chooseCity();
                 break;
-            case R.id.video_img:
+            case R.id.videoImg:
                 /**
                  * intent.setType(“image/*”);//选择图片
                  * intent.setType(“audio/*”); //选择音频
@@ -117,9 +116,9 @@ public class BeComeTeacherAty extends BaseAty<MineTeacherStatusUpgradePresenter>
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(Intent.createChooser(intent, "选择文件"), Config.VIDEO_PICKER);
                 break;
-//            case R.id.coverImg:
-//                pickerPhoto(Config.IMAGE_PICKER2);
-//                break;
+            case R.id.coverImg:
+                pickerPhoto(Config.IMAGE_PICKER2);
+                break;
             case R.id.confirmTv:
                 ((MineOrgStatusUpgradePresenter) mPresenter).postTeacherStatusUpgrade(ApiConfig.getToken(), "1", mDistrict_id, mHeadPath, nameEdit.getContent(), teacherBriefEdit.getContent(), danceTypeEdit.getContent(), addressEdit.getContent(), phoneEdit.getContent(), timeEdit.getContent(), mCoverPath, mVideoPath);
                 break;
@@ -199,33 +198,33 @@ public class BeComeTeacherAty extends BaseAty<MineTeacherStatusUpgradePresenter>
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(headImg);
 //                    mUpLoadPresenter.postPic("headImg", file);
-//                }
-//            } else if (data != null && requestCode == Config.IMAGE_PICKER2) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(coverImg);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } else if (data != null && requestCode == Config.IMAGE_PICKER2) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(coverImg);
 //                    mUpLoadPresenter.postPic("coverImg", file);
-//                }
-//            } else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+                    mUpLoadPresenter.postFile("coverImg",file,"3");
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postVideo("video", file);
+            File file = new File(MyUtils.getRealPath(BeComeTeacherAty.this,data));
+            mUpLoadPresenter.postFile("video",file,"1");
         }
     }
 

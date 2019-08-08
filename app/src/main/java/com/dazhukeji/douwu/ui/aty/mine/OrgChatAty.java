@@ -1,10 +1,12 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dazhukeji.douwu.R;
@@ -13,10 +15,11 @@ import com.dazhukeji.douwu.base.BaseAty;
 import com.dazhukeji.douwu.manager.RecyclerViewManager;
 import com.dazhukeji.douwu.view.LineItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
 
 /**
  * 创建者：zhangyunfei
@@ -30,7 +33,7 @@ public class OrgChatAty extends BaseAty {
     RecyclerView chatRecyclerView;
 
     private RecyclerViewManager mRecyclerViewManager;
-    private List<Object> mList;
+    private List<Conversation> mList;
     private MemberChatAdpater mMemberChatAdpater;
 
     @Override
@@ -43,21 +46,26 @@ public class OrgChatAty extends BaseAty {
         txtTitle.setText("我的回复");
         mRecyclerViewManager = new RecyclerViewManager(chatRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.VERTICAL);
-        mList=new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            mList.add(new Object());
+        mList = JMessageClient.getConversationList();
+        if (null != mList && mList.size()>0){
+            mMemberChatAdpater = new MemberChatAdpater(R.layout.member_chat_item, mList);
+            chatRecyclerView.setAdapter(mMemberChatAdpater);
+            LineItemDecoration decor = new LineItemDecoration(mContext, DividerItemDecoration.VERTICAL);
+            decor.setDrawable(ContextCompat.getDrawable(mContext,R.drawable.shape_line));
+            chatRecyclerView.addItemDecoration(decor);
+            mMemberChatAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Conversation conversation = mList.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Conversation",conversation);
+                    startActivity(MemberChatDetailsAty.class,bundle);
+                }
+            });
+        }else {
+            Toast.makeText(this, "暂无会话列表", Toast.LENGTH_SHORT).show();
         }
-        mMemberChatAdpater = new MemberChatAdpater(R.layout.member_chat_item, mList);
-        chatRecyclerView.setAdapter(mMemberChatAdpater);
-        LineItemDecoration decor = new LineItemDecoration(mContext, DividerItemDecoration.VERTICAL);
-        decor.setDrawable(ContextCompat.getDrawable(mContext,R.drawable.shape_line));
-        chatRecyclerView.addItemDecoration(decor);
-        mMemberChatAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(MemberChatDetailsAty.class);
-            }
-        });
+
     }
 
     @Override

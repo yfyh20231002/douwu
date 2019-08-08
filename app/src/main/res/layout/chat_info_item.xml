@@ -17,6 +17,7 @@
             android:src="@drawable/icon_video_head_placeholder" />
 
         <TextView
+            android:id="@+id/leftText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
@@ -40,6 +41,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/rightText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="3dp"

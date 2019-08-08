@@ -158,4 +158,51 @@ public class UpLoadPresenter extends BasePresenter<UpLoadContract.View> implemen
                     }
                 });
     }
+
+
+    public  void postFile(String channel, File file,String type) {
+        ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
+        //1.创建MultipartBody.Builder对象
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);//表单类型
+
+        //2.获取图片，创建请求体
+        RequestBody body=RequestBody.create(MediaType.parse("multipart/form-data"),file);//表单类型
+        //3.调用MultipartBody.Builder的addFormDataPart()方法添加表单数据
+        //        builder.addFormDataPart(key, value);//传入服务器需要的key，和相应value值
+        builder.addFormDataPart("file",file.getName(),body); //添加图片数据，body创建的请求体
+
+
+        builder.addFormDataPart("file_type",type);
+
+        //4.创建List<MultipartBody.Part> 集合，
+        //  调用MultipartBody.Builder的build()方法会返回一个新创建的MultipartBody
+        //  再调用MultipartBody的parts()方法返回MultipartBody.Part集合
+        List<MultipartBody.Part> parts=builder.build().parts();
+        Observable<Response> observable = apiService.postUploadFile(parts);
+        mView.showProgress();
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<Response>() {
+                    @Override
+                    public void onNext(Response response) {
+                        if (response.getCode() == 1){
+                            mView.uploadSuccess(channel,response.getData().toString());
+                        }
+                        mView.showError(response.getMsg());
+                        mView.hideProgress();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.showError(e.getMessage());
+                        mView.hideProgress();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 }
