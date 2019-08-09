@@ -20,11 +20,13 @@ import com.dazhukeji.douwu.view.MyEditText;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
+import java.io.File;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 
 /**
@@ -175,19 +177,22 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
         JMessageClient.login(data.get("jmphone"), data.get("jmpassword"), new BasicCallback() {
             @Override
             public void gotResult(int responseCode, String responseMessage) {
-//                if (responseCode == 0) {
-//                    SharedPreferencesUtils.getInstance(mContext).setCachedPsw(password);
-//                    UserInfo myInfo = JMessageClient.getMyInfo();
-//                    File avatarFile = myInfo.getAvatarFile();
-//                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
-//                    if (avatarFile != null) {
-//                        SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
-//                    } else {
-//                        SharePreferenceManager.setCachedAvatarPath(null);
-//                    }
-//                    String username = myInfo.getUserName();
-//                    String appKey = myInfo.getAppKey();
-//                }
+                if (responseCode == 0) {
+                    Config.setCachedPsw(data.get("jmpassword"));
+                    UserInfo myInfo = JMessageClient.getMyInfo();
+                    File avatarFile = myInfo.getAvatarFile();
+                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                    if (avatarFile != null) {
+                        Config.setUserHead(avatarFile.getAbsolutePath());
+                    } else {
+                        Config.setUserHead(null);
+                    }
+                    String username = myInfo.getUserName();
+                    String appKey = myInfo.getAppKey();
+                    Config.setusername(username);
+                    Config.setAppkey(appKey);
+
+                }
             }
         });
         startActivity(MainActivity.class);

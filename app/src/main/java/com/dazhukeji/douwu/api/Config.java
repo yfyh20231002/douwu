@@ -39,6 +39,49 @@ public class Config {
         SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).putString(ApiConfig.TOKEN,token);
     }
 
+
+
+    public static void setCachedPsw(String password){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).putString(ApiConfig.JIGUANGPASSWORD,password);
+    }
+
+
+    public static void setUserHead(String cachedAvatarPath){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).putString(ApiConfig.JIGUANGUSERHEAD,cachedAvatarPath);
+    }
+
+
+    public static void setusername(String username){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).putString(ApiConfig.JIGUANGUSERNAME,username);
+    }
+
+
+    public static void setAppkey(String appkey){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).putString(ApiConfig.JIGUANGAPPKEY,appkey);
+    }
+
+    public static void getCachedPsw(){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGPASSWORD,"");
+    }
+
+
+    public static void getUserHead(){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGUSERHEAD,"");
+    }
+
+
+    public static void getusername(){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGUSERNAME,"");
+    }
+
+
+    public static void getAppkey(){
+        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGAPPKEY,"");
+    }
+
+
+
+
     public static String getJson(ResponseBody responseBody){
         try {
             return responseBody.string();

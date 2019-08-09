@@ -13,6 +13,7 @@ import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseFgt;
+import com.dazhukeji.douwu.ui.aty.LoginAty;
 import com.dazhukeji.douwu.ui.aty.home.DanceOrgDetailsAty;
 import com.dazhukeji.douwu.ui.aty.home.TeacherDetailsAty;
 import com.dazhukeji.douwu.ui.aty.mine.EditPersonalInfoAty;
@@ -169,6 +170,8 @@ public class MyFragment extends BaseFgt{
                                 Map<String, String> organizationId = JSONUtils.parseKeyAndValueToMap(data.get("organization_id"));
                                 mOrganization_id = organizationId.get("organization_id");
                             }
+                        }else  if(Integer.parseInt(stringMap.get("code"))==-1){
+                            startActivity(LoginAty.class);
                         }else {
                             ToastUtils.showToast(stringMap.get("msg"));
                         }
@@ -269,22 +272,31 @@ public class MyFragment extends BaseFgt{
                 }
                 break;
             case R.id.loginOutTv:
-//                ((MainActivity)getActivity()).toHomeFragment();
-//                TipDialog tipDialog = new TipDialog.Builder(mContext).build();
-//                tipDialog.setConfirmTv(new TipDialog.OnClickListener() {
-//                    @Override
-//                    public void onClick() {
-//
-//                    }
-//                });
-//
-//                tipDialog.setCancelTv(new TipDialog.OnClickListener() {
-//                    @Override
-//                    public void onClick() {
-//                        tipDialog.dismiss();
-//                    }
-//                });
-//                tipDialog.show();
+                ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
+                Map<String, String> map = new HashMap<>();
+                map.put("user_token", ApiConfig.getToken());
+                Observable<ResponseBody> observable = apiService.postLoginOut(map);
+                observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new DisposableObserver<ResponseBody>() {
+                            @Override
+                            public void onNext(ResponseBody responseBody) {
+                                Map<String, String> stringMap = Config.getMap(responseBody);
+                                Config.setToken("");
+                                if (Integer.parseInt(stringMap.get("code"))==-1){
+                                    startActivity(LoginAty.class);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
                 break;
         }
     }

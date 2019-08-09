@@ -22,7 +22,7 @@ public class DwApplication extends BaseApplication {
                 .tag("hailong")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
-        LogUtils.isDebug = false;
+        LogUtils.isDebug = true;
         JMessageClient.setDebugMode(LogUtils.isDebug);
         JMessageClient.init(this);
 

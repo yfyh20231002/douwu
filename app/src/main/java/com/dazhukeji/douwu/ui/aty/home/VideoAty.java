@@ -342,6 +342,7 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     Bundle bundle = new Bundle();
                     bundle.putString("file_id", String.valueOf(data.get(position).getFile_id()));
+                    bundle.putString("fileType", "1");
                     startActivity(VideoDetailsAty.class, bundle);
                 }
             });

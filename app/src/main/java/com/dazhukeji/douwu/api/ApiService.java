@@ -336,6 +336,10 @@ public interface ApiService {
      * 会员中心
      */
     @FormUrlEncoded
+    @POST("user/log_out.html")
+    Observable<ResponseBody> postLoginOut(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
     @POST("user/user_centre.html")
     Observable<ResponseBody> postUserCentre(@FieldMap Map<String, String> map);
 
