@@ -92,7 +92,7 @@ public class BeComeTeacherAty extends BaseAty<MineOrgStatusUpgradePresenter> imp
 
     @Override
     public void initData() {
-
+        chooseCity();
     }
 
     @OnClick({R.id.headImg, R.id.chooseLayout, R.id.videoImg, R.id.coverImg, R.id.confirmTv})
@@ -102,7 +102,8 @@ public class BeComeTeacherAty extends BaseAty<MineOrgStatusUpgradePresenter> imp
                 pickerPhoto(Config.IMAGE_PICKER);
                 break;
             case R.id.chooseLayout:
-                chooseCity();
+                if (null != addressOptions)
+                addressOptions.show();
                 break;
             case R.id.videoImg:
                 /**
@@ -136,6 +137,8 @@ public class BeComeTeacherAty extends BaseAty<MineOrgStatusUpgradePresenter> imp
                         Map<String, String> map = Config.getMap(responseBody);
                         ArrayList<Map<String, String>> arrayList = JSONUtils.parseKeyAndValueToMapList(map.get("data"));
                         if (arrayList != null && arrayList.size() > 0) {
+                            mDistrict_id = arrayList.get(0).get("district_id");
+                            cityTv.setText(arrayList.get(0).get("district_name"));
                             initAddressOptions(arrayList);
                         }
                     }
@@ -192,7 +195,6 @@ public class BeComeTeacherAty extends BaseAty<MineOrgStatusUpgradePresenter> imp
                 .setOutSideCancelable(false)
                 .build();
         addressOptions.setPicker(cities);
-        addressOptions.show();
     }
 
     @Override

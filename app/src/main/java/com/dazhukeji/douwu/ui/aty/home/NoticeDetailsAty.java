@@ -115,14 +115,17 @@ public class NoticeDetailsAty extends BaseAty {
                             }
                             Map<String, String> information = JSONUtils.parseKeyAndValueToMap(data.get("information"));
                             if (null != information) {
-                                GlideApp.with(NoticeDetailsAty.this).load(ApiConfig.BASE_IMG_URL + information.get("pic")).into(logoPic);
+                                //GlideApp.with(NoticeDetailsAty.this).load(ApiConfig.BASE_IMG_URL + information.get("pic")).into(logoPic);
                                 titleTv.setText(information.get("name"));
                                 timeTv.setText(information.get("time"));
                                 phoneTv.setText(information.get("phone"));
                                 addressTv.setText(information.get("site"));
                                 typeTv.setText(information.get("dance_type"));
                                 introduceTv.setText(information.get("introduce"));
-                                GlideApp.with(NoticeDetailsAty.this).load(ApiConfig.BASE_IMG_URL + information.get("hezuo_pic")).into(hezuoPic);
+                                //GlideApp.with(NoticeDetailsAty.this).load(ApiConfig.BASE_IMG_URL + information.get("hezuo_pic")).into(hezuoPic);
+                                GlideApp.with(NoticeDetailsAty.this).load(ApiConfig.BASE_IMG_URL + information.get("pic"))
+                                        .centerCrop()
+                                        .into(hezuoPic);
                             }
                         }
                     }
