@@ -365,7 +365,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("user/status_upgrade.html")
-    Observable<BaseBean> postUserStatusUpgrade(@FieldMap Map<String, RequestBody> map);
+    Observable<BaseBean> postUserStatusUpgrade(@FieldMap Map<String, Object> map);
 
 
     @FormUrlEncoded

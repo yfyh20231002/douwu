@@ -7,11 +7,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
         android:gravity="center_horizontal">
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_dialog_head_bg" />
         <LinearLayout
@@ -19,7 +19,7 @@
             android:background="@color/white"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <TextView
                 android:id="@+id/titleTv"
                 android:textColor="#666666"
