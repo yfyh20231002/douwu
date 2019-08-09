@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -204,7 +205,7 @@ public class VideoDetailsAty extends BaseAty {
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("file_id", mFile_id);
-        requestMap.put("user_token", ApiConfig.getToken());
+        requestMap.put("user_token", TextUtils.isEmpty(ApiConfig.getToken())?"8202b7e111b0e2d66c21d1223e22c7b4":ApiConfig.getToken());
         requestMap.put("file_type", mFileType);
         Observable<ResponseBody> observable = apiService.postFilePlay(requestMap);
         observable.subscribeOn(Schedulers.io())

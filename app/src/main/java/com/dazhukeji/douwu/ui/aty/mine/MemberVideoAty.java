@@ -169,6 +169,7 @@ public class MemberVideoAty extends BaseAty {
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("file_id", arrayList.get(position).get("file_id"));
+                                    bundle.putString("fileType", "1");
                                     bundle.putBoolean("isGoneReport",true);
                                     startActivity(VideoDetailsAty.class, bundle);
                                 }
