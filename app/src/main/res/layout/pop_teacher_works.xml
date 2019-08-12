@@ -9,6 +9,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <ImageView

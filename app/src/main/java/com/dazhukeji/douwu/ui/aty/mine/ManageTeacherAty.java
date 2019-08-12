@@ -285,8 +285,10 @@ public class ManageTeacherAty extends BaseAty {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.editTv:
-                mTeacherAdapter.showEdit(true);
-                addTeacherTv.setVisibility(View.VISIBLE);
+                if (null != mTeacherAdapter){
+                    mTeacherAdapter.showEdit(true);
+                    addTeacherTv.setVisibility(View.VISIBLE);
+                }
                 break;
             case R.id.addTeacherTv:
                 startActivity(AddTeacherAty.class);

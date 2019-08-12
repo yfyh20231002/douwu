@@ -26,7 +26,6 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -428,7 +427,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("user/user_teacher_affirm_edit.html")
-    Observable<BaseBean> postUserTeacherAffirmEdit(@FieldMap Map<String, RequestBody> map);
+    Observable<BaseBean> postUserTeacherAffirmEdit(@FieldMap Map<String, String> map);
 
     /**
      * 会员中心 ---机构中心

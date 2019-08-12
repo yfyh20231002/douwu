@@ -117,19 +117,19 @@ public class OrganizationRecruitAty extends BaseAty<OrgRecruitPresenter> impleme
 
     @OnClick({R.id.picImg1, R.id.picImg2, R.id.confirmTv})
     public void onViewClicked(View view) {
-//        setImagePicker();
-//        Intent intent = new Intent(this, ImageGridActivity.class);
+        setImagePicker();
+        Intent intent = new Intent(this, ImageGridActivity.class);
         switch (view.getId()) {
-//            case R.id.picImg1:
-//                startActivityForResult(intent, Config.IMAGE_PICKER);
-//                break;
-//            case R.id.picImg2:
-//                startActivityForResult(intent, Config.IMAGE_PICKER2);
-//                break;
+            case R.id.picImg1:
+                startActivityForResult(intent, Config.IMAGE_PICKER);
+                break;
+            case R.id.picImg2:
+                startActivityForResult(intent, Config.IMAGE_PICKER2);
+                break;
             case R.id.confirmTv:
-//                if (TextUtils.isEmpty(mPicture1) || TextUtils.isEmpty(mPicture2)){
-//
-//                }
+                if (TextUtils.isEmpty(mPicture1) || TextUtils.isEmpty(mPicture2)){
+                    Toast.makeText(OrganizationRecruitAty.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
+                }
                 if (confirmTv.getText().toString().equals("确认修改")){
                     ((OrgRecruitPresenter)mPresenter).postOrganizationInvitationEdit(ApiConfig.getToken(),String.valueOf(mInvitation_id),administratorsNameEdit.getContent(),phoneEdit.getContent(),addressEdit.getContent(),timeEdit.getContent(),typeEdit.getContent(),ageEdit.getContent(),applicationRequirementsEdit.getContent(),mPicture1,mPicture2);
                 }else {
@@ -142,27 +142,29 @@ public class OrganizationRecruitAty extends BaseAty<OrgRecruitPresenter> impleme
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File mFile = new File(path);
-//                        GlideApp.with(mContext).load(mFile).into(picImg1);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File mFile = new File(path);
+                        GlideApp.with(mContext).load(mFile).into(picImg1);
 //                    mUpLoadPresenter.postPic("image1",mFile);
-//                }
-//            }else if (data != null && requestCode == Config.IMAGE_PICKER2) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File mFile = new File(path);
-//                    GlideApp.with(mContext).load(mFile).into(picImg2);
+                    mUpLoadPresenter.postFile("image1",mFile,"3");
+                }
+            }else if (data != null && requestCode == Config.IMAGE_PICKER2) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File mFile = new File(path);
+                    GlideApp.with(mContext).load(mFile).into(picImg2);
 //                    mUpLoadPresenter.postPic("image2",mFile);
-//                }
-//            }else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+                    mUpLoadPresenter.postFile("image2",mFile,"3");
+                }
+            }else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override

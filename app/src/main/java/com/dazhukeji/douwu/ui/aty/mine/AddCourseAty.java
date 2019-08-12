@@ -1,7 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +26,7 @@ import com.dazhukeji.douwu.contract.DanceTypeContract;
 import com.dazhukeji.douwu.contract.upload.UpLoadContract;
 import com.dazhukeji.douwu.presenter.DanceTypePresenter;
 import com.dazhukeji.douwu.presenter.UpLoadPresenter;
+import com.dazhukeji.douwu.utils.MyUtils;
 import com.dazhukeji.douwu.view.MyEditText;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -34,6 +34,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.io.File;
@@ -190,11 +191,11 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
     @OnClick({R.id.picImg, R.id.videoImg, R.id.startLayout, R.id.endLayout, R.id.confirmTv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-//            case R.id.picImg:
-//                setImagePicker();
-//                Intent intent = new Intent(this, ImageGridActivity.class);
-//                startActivityForResult(intent, Config.IMAGE_PICKER);
-//                break;
+            case R.id.picImg:
+                setImagePicker();
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, Config.IMAGE_PICKER);
+                break;
             case R.id.videoImg:
                 /**
                  * intent.setType(“image/*”);//选择图片
@@ -220,6 +221,15 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
     }
 
     private void confirm() {
+        if (StringUtils.isEmpty(courseTeacherEdit.getContent())||StringUtils.isEmpty(courseNameEdit.getContent())
+                ||StringUtils.isEmpty(imgPath)
+                ||StringUtils.isEmpty(courseEdit.getContent())
+                ||StringUtils.isEmpty(videoPath)
+                ||StringUtils.isEmpty(coursePriceEdit.getContent())
+        ){
+            Toast.makeText(AddCourseAty.this, "请将信息填写完整", Toast.LENGTH_SHORT).show();
+            return;
+        }
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> map = new HashMap<>();
         map.put("user_token", ApiConfig.getToken());
@@ -309,24 +319,24 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).into(picImg);
-//                    mUpLoadPresenter.postPic("headImg", file);
-//                }
-//            } else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(picImg);
+                    //mUpLoadPresenter.postPic("headImg", file);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postVideo("video", file);
+            File file = new File(MyUtils.getRealPath(AddCourseAty.this,data));
+            //mUpLoadPresenter.postVideo("video", file);
+            mUpLoadPresenter.postFile("video",file,"1");
         }
     }
 

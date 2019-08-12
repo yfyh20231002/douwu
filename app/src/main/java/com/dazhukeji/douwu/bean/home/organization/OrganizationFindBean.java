@@ -41,7 +41,7 @@ public class OrganizationFindBean extends BaseBean {
         private int attention_state;
         private BasicBean basic;
         private VideoBean video;
-        private InvitationBean invitation;
+        private List<InvitationBean> invitation;
         private List<CurriculumBean> curriculum;
         private List<OrganizationTeacherBean> organization_teacher;
         private List<VideosBean> videos;
@@ -70,11 +70,11 @@ public class OrganizationFindBean extends BaseBean {
             this.video = video;
         }
 
-        public InvitationBean getInvitation() {
+        public List<InvitationBean> getInvitation() {
             return invitation;
         }
 
-        public void setInvitation(InvitationBean invitation) {
+        public void setInvitation(List<InvitationBean> invitation) {
             this.invitation = invitation;
         }
 

@@ -1,7 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +20,7 @@ import com.dazhukeji.douwu.contract.mine.teacher.MemberTeacherContract;
 import com.dazhukeji.douwu.contract.upload.UpLoadContract;
 import com.dazhukeji.douwu.presenter.UpLoadPresenter;
 import com.dazhukeji.douwu.presenter.mine.teacher.MemberTeacherPresenter;
+import com.dazhukeji.douwu.utils.MyUtils;
 import com.dazhukeji.douwu.view.MyEditText;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -127,32 +127,32 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
-//                    mUpLoadPresenter.postPic("headImg", file);
-//                }
-//            } if (data != null && requestCode == Config.IMAGE_PICKER2) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).into(coverImg);
-//                    mUpLoadPresenter.postPic("coverImg", file);
-//                }
-//            }else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
+                    //mUpLoadPresenter.postPic("headImg", file);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } if (data != null && requestCode == Config.IMAGE_PICKER2) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(coverImg);
+                    //mUpLoadPresenter.postPic("coverImg", file);
+                    mUpLoadPresenter.postFile("coverImg",file,"3");
+                }
+            }else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postVideo("video", file);
+            File file = new File(MyUtils.getRealPath(MemberTeacherInfo.this,data));
+            mUpLoadPresenter.postFile("video",file,"1");
         }
     }
 
@@ -161,9 +161,9 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.headImg:
-//                setImagePicker();
-//                Intent intent = new Intent(this, ImageGridActivity.class);
-//                startActivityForResult(intent, Config.IMAGE_PICKER);
+                setImagePicker();
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, Config.IMAGE_PICKER);
                 break;
             case R.id.videoImg:
                 /**
@@ -178,9 +178,9 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
                 startActivityForResult(Intent.createChooser(intent2, "选择文件"), Config.VIDEO_PICKER);
                 break;
             case R.id.coverImg:
-//                setImagePicker();
-//                Intent intent3 = new Intent(this, ImageGridActivity.class);
-//                startActivityForResult(intent3, Config.IMAGE_PICKER2);
+                setImagePicker();
+                Intent intent3 = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent3, Config.IMAGE_PICKER2);
                 break;
             case R.id.chooseLayout:
                 chooseCity();

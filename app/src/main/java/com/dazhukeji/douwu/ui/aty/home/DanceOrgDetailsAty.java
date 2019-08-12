@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.dazhukeji.douwu.MyLogger;
 import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
@@ -289,10 +288,17 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
         videoplayer.setUp(ApiConfig.BASE_IMG_URL + video.getPromotional_video(), "", Jzvd.SCREEN_WINDOW_NORMAL);
         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + video.getPromotional_cover()).into(videoplayer.thumbImageView);
 
-        OrganizationFindBean.DataBean.InvitationBean invitation = organizationFindBean.getData().getInvitation();
-        mInvitation_id = invitation.getInvitation_id();
-        recruitTitleTv.setText(invitation.getInvitation_title());
-        recruitTypeTv.setText(invitation.getInvitation_dance_type());
+        List<OrganizationFindBean.DataBean.InvitationBean> invitation1 = organizationFindBean.getData().getInvitation();
+        if (invitation1.size()>0){
+            OrganizationFindBean.DataBean.InvitationBean invitation = invitation1.get(0);
+            if (null != invitation){
+                mInvitation_id = invitation.getInvitation_id();
+                recruitTitleTv.setText(invitation.getInvitation_title());
+                recruitTypeTv.setText(invitation.getInvitation_dance_type());
+            }
+        }
+
+
 
         List<OrganizationFindBean.DataBean.CurriculumBean> curriculum = organizationFindBean.getData().getCurriculum();
 

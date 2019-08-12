@@ -94,7 +94,8 @@ public class MyFragment extends BaseFgt{
     }
 
     @Override
-    protected void requestData() {
+    public void onResume() {
+        super.onResume();
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> map = new HashMap<>();
         map.put("user_token", ApiConfig.getToken());
@@ -186,6 +187,11 @@ public class MyFragment extends BaseFgt{
 
                     }
                 });
+    }
+
+    @Override
+    protected void requestData() {
+
     }
 
 
