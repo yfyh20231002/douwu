@@ -71,6 +71,7 @@ public class ManageTeacherAty extends BaseAty {
         };
         teacherRecyclerView.setLayoutManager(layoutManager);
         addTeacherTv.setVisibility(View.GONE);
+        mTeacherAdapter = new TeacherAdapter(R.layout.teacher_item, null);
     }
 
     @Override
@@ -119,9 +120,9 @@ public class ManageTeacherAty extends BaseAty {
 
                                 int organization_recommend_teacher = Integer.parseInt(data.get("organization_recommend_teacher"));
                                 if (organization_recommend_teacher > 3) {
-                                    mTeacherAdapter = new TeacherAdapter(R.layout.teacher_item, mapArrayList, true);
+                                    mTeacherAdapter.setDataAndState(mapArrayList,true);
                                 } else {
-                                    mTeacherAdapter = new TeacherAdapter(R.layout.teacher_item, mapArrayList, false);
+                                    mTeacherAdapter.setDataAndState(mapArrayList,false);
                                 }
                                 teacherRecyclerView.setAdapter(mTeacherAdapter);
                                 mTeacherAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -301,9 +302,14 @@ public class ManageTeacherAty extends BaseAty {
         private boolean isShow;
         private boolean isGone;
 
-        public TeacherAdapter(int layoutResId, @Nullable List<Map<String, String>> data, boolean state) {
+        public TeacherAdapter(int layoutResId, @Nullable List<Map<String, String>> data) {
             super(layoutResId, data);
+
+        }
+
+        public void setDataAndState(List<Map<String, String>> data,boolean state){
             this.isGone = state;
+            notifyDataSetChanged();
         }
 
         @Override

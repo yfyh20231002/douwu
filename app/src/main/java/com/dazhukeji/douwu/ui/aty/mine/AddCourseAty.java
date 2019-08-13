@@ -120,6 +120,7 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
      * teacher 老师添加课程
      */
     private String mFrom;
+    private int dance_type_id;
 
     @Override
     public int getLayoutId() {
@@ -227,7 +228,7 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                 ||StringUtils.isEmpty(videoPath)
                 ||StringUtils.isEmpty(coursePriceEdit.getContent())
         ){
-            Toast.makeText(AddCourseAty.this, "请将信息填写完整", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请将信息填写完整", Toast.LENGTH_SHORT).show();
             return;
         }
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
@@ -261,10 +262,12 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                 }
             }
         });
+        map.put("curriculum_difficulty", "初级进阶");
+        map.put("curriculum_effective", "1");
         map.put("curriculum_start_time", mStartDate);
         map.put("curriculum_over_time", mEndDate);
         if (mTitleList != null) {
-            map.put("dance_type_id", String.valueOf(mTitleList.get(mTitlesAdapter.getSelectPositon()).getDance_type_id()));
+            map.put("dance_type_id", String.valueOf(dance_type_id));
         }
         Observable<ResponseBody> observable = null;
         if (mFrom.equals("org")) {
@@ -300,13 +303,14 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
         List<DanceTypeBean.DataBean> dance_type = danceTypeBean.getData();
         if (dance_type != null && dance_type.size() > 0) {
             mTitleList = dance_type;
+            dance_type_id = mTitleList.get(0).getDance_type_id();
             if (mTitlesAdapter == null) {
                 mTitlesAdapter = new TitlesAdapter(R.layout.title_item, dance_type);
                 titlesRecyclerView.setAdapter(mTitlesAdapter);
                 mTitlesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        mTitlesAdapter.setSelectPosition(position);
+                        dance_type_id = mTitleList.get(position).getDance_type_id();
                     }
                 });
             } else {

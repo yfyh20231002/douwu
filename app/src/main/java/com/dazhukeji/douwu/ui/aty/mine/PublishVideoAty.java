@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.io.File;
@@ -86,6 +88,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
      */
     private String mFrom;
     private String mDistrictId;
+    private int dance_type_id;
 
     @Override
     public int getLayoutId() {
@@ -130,13 +133,15 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
         List<DanceTypeBean.DataBean> dance_type = danceTypeBean.getData();
         if (dance_type != null && dance_type.size() > 0) {
             mTitleList = dance_type;
+            dance_type_id = mTitleList.get(0).getDance_type_id();
             if (mTitlesAdapter == null) {
                 mTitlesAdapter = new TitlesAdapter(R.layout.title_item, dance_type);
                 titlesRecyclerView.setAdapter(mTitlesAdapter);
                 mTitlesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        mTitlesAdapter.setSelectPosition(position);
+//                        mTitlesAdapter.setSelectPosition(position);
+                        dance_type_id = mTitleList.get(position).getDance_type_id();
                     }
                 });
             } else {
@@ -237,9 +242,16 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
     }
 
     private void confirm() {
+        if (StringUtils.isEmpty(titleEdit.getContent())){
+            Toast.makeText(mContext, "请将信息填写完整", Toast.LENGTH_SHORT).show();
+            return;
+        }
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> map = new HashMap<>();
         map.put("user_token", ApiConfig.getToken());
+        if (null == mDistrictId){
+            mDistrictId = "1";
+        }
         map.put("district_id", mDistrictId);
         map.put("file_cover", imgPath);
         map.put("file_name", titleEdit.getContent());
@@ -256,7 +268,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
             map.put("file_type", "3");
         }
         if (mTitleList != null) {
-            map.put("dance_type_id", String.valueOf(mTitleList.get(mTitlesAdapter.getSelectPositon()).getDance_type_id()));
+            map.put("dance_type_id", String.valueOf(dance_type_id));
         }
         Observable<ResponseBody> observable = null;
         if (mFrom.equals("teacher")) {
@@ -288,6 +300,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
 
                         @Override
                         public void onError(Throwable e) {
+                            Log.e("yunfei", "onError: "+e.toString() );
                         }
 
                         @Override

@@ -22,6 +22,7 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
+import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -174,5 +175,11 @@ public class OrganizationRecruitAty extends BaseAty<OrgRecruitPresenter> impleme
         }else if ("image2".equals(channel)){
             mPicture2 = path;
         }
+    }
+
+    @Override
+    public void showError(String msg) {
+        super.showError(msg);
+        ToastUtils.showToast(msg);
     }
 }

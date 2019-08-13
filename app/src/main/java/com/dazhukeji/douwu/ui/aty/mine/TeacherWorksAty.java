@@ -200,6 +200,7 @@ public class TeacherWorksAty extends BaseAty {
                 bundle.putString("type", "image");
                 bundle.putString("from","teacher");
                 startActivity(PublishVideoAty.class, bundle);
+                mPopupWindow.dismiss();
             }
         });
         videoLayout.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +210,7 @@ public class TeacherWorksAty extends BaseAty {
                 bundle.putString("type", "video");
                 bundle.putString("from","teacher");
                 startActivity(PublishVideoAty.class, bundle);
+                mPopupWindow.dismiss();
             }
         });
         musicLayout.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +220,7 @@ public class TeacherWorksAty extends BaseAty {
                 bundle.putString("type", "music");
                 bundle.putString("from","teacher");
                 startActivity(PublishVideoAty.class, bundle);
+                mPopupWindow.dismiss();
             }
         });
         mPopupWindow.setContentView(view);

@@ -29,6 +29,7 @@ import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -94,11 +95,12 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
         mEnter_type = getIntent().getStringExtra("enter_type");
         mUpLoadPresenter = new UpLoadPresenter();
         mUpLoadPresenter.attachView(this, mContext);
+        chooseCity();
+        ((MemberTeacherPresenter) mPresenter).postTeacherInformation(ApiConfig.getToken());
     }
 
     @Override
     public void initData() {
-        ((MemberTeacherPresenter) mPresenter).postTeacherInformation(ApiConfig.getToken());
     }
 
     @Override
@@ -113,6 +115,9 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
         timeEdit.setText(data.getSchooltime());
         teacherBriefEdit.setText(data.getTeacher_intro());
         danceTypeEdit.setText(data.getTeacher_master());
+        headImgPath = data.getTeacher_portrait();
+        coverImgPath = data.getTeacher_video_cover();
+        videoPath = data.getTeacher_video();
         if (!TextUtils.isEmpty(data.getTeacher_video_cover())){
             GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + data.getTeacher_video_cover()).into(coverImg);
         }
@@ -137,7 +142,7 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
                     //mUpLoadPresenter.postPic("headImg", file);
                     mUpLoadPresenter.postFile("headImg",file,"3");
                 }
-            } if (data != null && requestCode == Config.IMAGE_PICKER2) {
+            }else if (data != null && requestCode == Config.IMAGE_PICKER2) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images.size() > 0) {
                     String path = images.get(0).path;
@@ -183,9 +188,20 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
                 startActivityForResult(intent3, Config.IMAGE_PICKER2);
                 break;
             case R.id.chooseLayout:
-                chooseCity();
+                if (null != addressOptions){
+                    addressOptions.show();
+                }
                 break;
             case R.id.confirmTv:
+                if (StringUtils.isEmpty(headImgPath)||StringUtils.isEmpty(nameEdit.getContent())
+                        ||StringUtils.isEmpty(teacherBriefEdit.getContent())
+                        ||StringUtils.isEmpty(danceTypeEdit.getContent())
+                        ||StringUtils.isEmpty(videoPath)
+                        ||StringUtils.isEmpty(addressEdit.getContent())
+                ){
+                    Toast.makeText(mContext, "请将信息填写完整", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ((MemberTeacherPresenter) mPresenter).postUserTeacherAffirmEdit(ApiConfig.getToken(), headImgPath, nameEdit.getContent(), teacherBriefEdit.getContent(), danceTypeEdit.getContent(), addressEdit.getContent(), phoneEdit.getContent(), timeEdit.getContent(),coverImgPath,videoPath);
                 break;
         }
@@ -202,6 +218,8 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
                         Map<String, String> map = Config.getMap(responseBody);
                         ArrayList<Map<String, String>> arrayList = JSONUtils.parseKeyAndValueToMapList(map.get("data"));
                         if (arrayList != null && arrayList.size() > 0) {
+                            mDistrict_id = arrayList.get(0).get("district_id");
+                            cityTv.setText(arrayList.get(0).get("district_name"));
                             initAddressOptions(arrayList);
                         }
                     }
@@ -246,7 +264,6 @@ public class MemberTeacherInfo extends BaseAty<MemberTeacherPresenter> implement
                 .setOutSideCancelable(false)
                 .build();
         addressOptions.setPicker(cities);
-        addressOptions.show();
     }
 
     @Override

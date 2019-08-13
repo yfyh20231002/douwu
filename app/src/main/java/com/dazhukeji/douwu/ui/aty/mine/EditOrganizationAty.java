@@ -1,7 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -14,6 +13,7 @@ import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
 import com.dazhukeji.douwu.contract.upload.UpLoadContract;
 import com.dazhukeji.douwu.presenter.UpLoadPresenter;
+import com.dazhukeji.douwu.utils.MyUtils;
 import com.dazhukeji.douwu.view.MyEditText;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -154,9 +154,9 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
     @OnClick({R.id.headImg, R.id.videoImg, R.id.coverImg, R.id.bgImg, R.id.confirmTv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-//            case R.id.headImg:
-//                pickerPhoto(Config.IMAGE_PICKER);
-//                break;
+            case R.id.headImg:
+                pickerPhoto(Config.IMAGE_PICKER);
+                break;
             case R.id.videoImg:
                 /**
                  * intent.setType(“image/*”);//选择图片
@@ -169,12 +169,12 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(Intent.createChooser(intent, "选择文件"), Config.VIDEO_PICKER);
                 break;
-//            case R.id.coverImg:
-//                pickerPhoto(Config.IMAGE_PICKER2);
-//                break;
-//            case R.id.bgImg:
-//                pickerPhoto(Config.IMAGE_PICKER3);
-//                break;
+            case R.id.coverImg:
+                pickerPhoto(Config.IMAGE_PICKER2);
+                break;
+            case R.id.bgImg:
+                pickerPhoto(Config.IMAGE_PICKER3);
+                break;
             case R.id.confirmTv:
                 confirm();
                 break;
@@ -237,41 +237,42 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-//            if (data != null && requestCode == Config.IMAGE_PICKER) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Config.IMAGE_PICKER) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).circleCrop().into(headImg);
 //                    mUpLoadPresenter.postPic("headImg", file);
-//                }
-//            } else if (data != null && requestCode == Config.IMAGE_PICKER2) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).into(coverImg);
+                    mUpLoadPresenter.postFile("headImg",file,"3");
+                }
+            } else if (data != null && requestCode == Config.IMAGE_PICKER2) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).into(coverImg);
 //                    mUpLoadPresenter.postPic("coverImg", file);
-//                }
-//            } else if (data != null && requestCode == Config.IMAGE_PICKER3) {
-//                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-//                if (images.size() > 0) {
-//                    String path = images.get(0).path;
-//                    File file = new File(path);
-//                    GlideApp.with(mContext).load(file).circleCrop().into(bgImg);
+                    mUpLoadPresenter.postFile("coverImg",file,"3");
+                }
+            } else if (data != null && requestCode == Config.IMAGE_PICKER3) {
+                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (images.size() > 0) {
+                    String path = images.get(0).path;
+                    File file = new File(path);
+                    GlideApp.with(mContext).load(file).circleCrop().into(bgImg);
 //                    mUpLoadPresenter.postPic("bgImg", file);
-//                }
-//            } else {
-//                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+                    mUpLoadPresenter.postFile("bgImg",file,"3");
+                }
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            File file = new File(path);
-            mUpLoadPresenter.postVideo("video", file);
+            File file = new File(MyUtils.getRealPath(mContext,data));
+            mUpLoadPresenter.postFile("video",file,"1");
         }
     }
 

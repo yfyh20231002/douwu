@@ -85,6 +85,7 @@ public class OrgRecruitPresenter extends BasePresenter<OrgRecruitContract.View> 
                         }else {
                             mView.showError(response.getMsg());
                         }
+                        mView.showError(response.getMsg());
                         mView.hideProgress();
                     }
 
@@ -129,6 +130,7 @@ public class OrgRecruitPresenter extends BasePresenter<OrgRecruitContract.View> 
                         }else {
                             mView.showError(response.getMsg());
                         }
+                        mView.showError(response.getMsg());
                         mView.hideProgress();
                     }
 
