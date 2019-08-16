@@ -34,6 +34,9 @@ import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.DateUtils;
 import com.zhangyunfei.mylibrary.utils.DisplayHelper;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
+import com.zhangyunfei.mylibrary.utils.GsonUtil;
+import com.zhangyunfei.mylibrary.utils.JSONUtils;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -262,11 +265,12 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
     }
 
     @Override
-    public void refresh(OrganizationFindBean organizationFindBean) {
-        OrganizationFindBean.DataBean.BasicBean basic = organizationFindBean.getData().getBasic();
+    public void refresh(Map<String, String> map) {
+        Map<String, String> data = JSONUtils.parseKeyAndValueToMap(map.get("data"));
+        OrganizationFindBean.DataBean.BasicBean basic = GsonUtil.GsonToBean(data.get("basic"), OrganizationFindBean.DataBean.BasicBean.class);
 
         if (!mIsShow) {
-            attention_state = organizationFindBean.getData().getAttention_state();
+            attention_state = Integer.parseInt(data.get("attention_state"));
             exchangeFollowState();
         }
 
@@ -284,33 +288,35 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
 
         briefTv.setText(basic.getOrganization_synopsis());
 
-        OrganizationFindBean.DataBean.VideoBean video = organizationFindBean.getData().getVideo();
+        OrganizationFindBean.DataBean.VideoBean video = GsonUtil.GsonToBean(data.get("video"), OrganizationFindBean.DataBean.VideoBean.class);
         videoplayer.setUp(ApiConfig.BASE_IMG_URL + video.getPromotional_video(), "", Jzvd.SCREEN_WINDOW_NORMAL);
         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + video.getPromotional_cover()).into(videoplayer.thumbImageView);
 
-        List<OrganizationFindBean.DataBean.InvitationBean> invitation1 = organizationFindBean.getData().getInvitation();
-        if (invitation1.size()>0){
-            OrganizationFindBean.DataBean.InvitationBean invitation = invitation1.get(0);
-            if (null != invitation){
-                mInvitation_id = invitation.getInvitation_id();
-                recruitTitleTv.setText(invitation.getInvitation_title());
-                recruitTypeTv.setText(invitation.getInvitation_dance_type());
+        String invitation = data.get("invitation");
+        if (invitation.length() > 2) {
+            OrganizationFindBean.DataBean.InvitationBean invitationBean = GsonUtil.GsonToBean(data.get("invitation"), OrganizationFindBean.DataBean.InvitationBean.class);
+            if (null != invitationBean) {
+                mInvitation_id = invitationBean.getInvitation_id();
+                recruitTitleTv.setText(invitationBean.getInvitation_title());
+                recruitTypeTv.setText(invitationBean.getInvitation_dance_type());
             }
         }
 
 
+        List<OrganizationFindBean.DataBean.CurriculumBean> curriculum = GsonUtil.getObjectList(data.get("curriculum"), OrganizationFindBean.DataBean.CurriculumBean.class);
+        if (!StringUtils.isEmpty(curriculum)) {
+            mChildCourseAdapter = new CourseAdapter(R.layout.child_course_item, curriculum);
+            courseChildRecyclerView.setAdapter(mChildCourseAdapter);
+        }
 
-        List<OrganizationFindBean.DataBean.CurriculumBean> curriculum = organizationFindBean.getData().getCurriculum();
 
-        mChildCourseAdapter = new CourseAdapter(R.layout.child_course_item, curriculum);
-        courseChildRecyclerView.setAdapter(mChildCourseAdapter);
-
-
-        List<OrganizationFindBean.DataBean.OrganizationTeacherBean> organization_teacher = organizationFindBean.getData().getOrganization_teacher();
-        teacherRecyclerView.setAdapter(new TeacherAdapter(R.layout.teacher_item, organization_teacher, mContext));
+        List<OrganizationFindBean.DataBean.OrganizationTeacherBean> organization_teacher = GsonUtil.getObjectList(data.get("organization_teacher"), OrganizationFindBean.DataBean.OrganizationTeacherBean.class);
+        if (!StringUtils.isEmpty(organization_teacher)) {
+            teacherRecyclerView.setAdapter(new TeacherAdapter(R.layout.teacher_item, organization_teacher, mContext));
+        }
 
         mList.clear();
-        List<OrganizationFindBean.DataBean.VideosBean> videos = organizationFindBean.getData().getVideos();
+        List<OrganizationFindBean.DataBean.VideosBean> videos = GsonUtil.getObjectList(data.get("videos"), OrganizationFindBean.DataBean.VideosBean.class);
         mList.addAll(videos);
         mVideoAdpater = new VideoAdpater(R.layout.video_item, mList, mContext);
         videoRecyclerView.setAdapter(mVideoAdpater);

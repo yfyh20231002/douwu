@@ -6,7 +6,6 @@ import com.dazhukeji.douwu.bean.home.HomeIndexPagingBean;
 import com.dazhukeji.douwu.bean.home.courses.AllCoursesBean;
 import com.dazhukeji.douwu.bean.home.invitation.InvitationFindBean;
 import com.dazhukeji.douwu.bean.home.invitation.InvitationListBean;
-import com.dazhukeji.douwu.bean.home.organization.OrganizationFindBean;
 import com.dazhukeji.douwu.bean.home.organization.OrganizationListBean;
 import com.dazhukeji.douwu.bean.home.teacher.TeacherListBean;
 import com.dazhukeji.douwu.bean.home.video.PlayVideoBean;
@@ -131,7 +130,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("Organization/organization_find.html")
-    Observable<OrganizationFindBean> postOrganizationFind(@FieldMap Map<String, String> map);
+    Observable<ResponseBody> postOrganizationFind(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST("Organization/organization_invitation.html")

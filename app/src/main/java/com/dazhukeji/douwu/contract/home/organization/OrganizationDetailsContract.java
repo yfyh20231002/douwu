@@ -1,8 +1,9 @@
 package com.dazhukeji.douwu.contract.home.organization;
 
-import com.dazhukeji.douwu.bean.home.organization.OrganizationFindBean;
 import com.zhangyunfei.mylibrary.base.IPresenter;
 import com.zhangyunfei.mylibrary.base.IView;
+
+import java.util.Map;
 
 /**
  * 创建者：zhangyunfei
@@ -11,7 +12,7 @@ import com.zhangyunfei.mylibrary.base.IView;
  */
 public class OrganizationDetailsContract {
     public  interface View extends IView{
-        void refresh(OrganizationFindBean organizationFindBean);
+        void refresh(Map<String, String> data);
     }
 
     public interface Presenter extends IPresenter<View>{

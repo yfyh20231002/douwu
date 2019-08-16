@@ -3,6 +3,7 @@ package com.zhangyunfei.mylibrary.utils;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,5 +41,13 @@ public class StringUtils {
 
     public static boolean isEmpty(String str) {
         return (str == null || str.length() == 0);
+    }
+
+    public static boolean isEmpty(List  list) {
+
+        if (list == null || list.size() == 0){
+            return true;
+        }
+        return false;
     }
 }

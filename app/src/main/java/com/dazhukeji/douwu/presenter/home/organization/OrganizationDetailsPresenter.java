@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.dazhukeji.douwu.MyLogger;
 import com.dazhukeji.douwu.api.ApiService;
+import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.bean.home.organization.OrganizationFindBean;
 import com.dazhukeji.douwu.contract.home.organization.OrganizationDetailsContract;
 import com.zhangyunfei.mylibrary.base.BasePresenter;
@@ -20,6 +21,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 /**
  * 创建者：zhangyunfei
@@ -34,18 +36,15 @@ public class OrganizationDetailsPresenter extends BasePresenter<OrganizationDeta
         Map<String, String> map = new HashMap<>();
         map.put("organization_id", organization_id);
         map.put("user_token", ApiConfig.getToken());
-        Observable<OrganizationFindBean> observable = apiService.postOrganizationFind(map);
+        Observable<ResponseBody> observable = apiService.postOrganizationFind(map);
         mView.showProgress();
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<OrganizationFindBean>() {
+                .subscribe(new Consumer<ResponseBody>() {
                     @Override
-                    public void accept(OrganizationFindBean bean) throws Exception {
-                        if (bean.getCode() == 1) {
-                            mView.refresh(bean);
-                        } else {
-                            mView.showError(bean.getMsg());
-                        }
+                    public void accept(ResponseBody body) throws Exception {
+                        Map<String, String> data = Config.getMap(body);
+                        mView.refresh(data);
                         mView.hideProgress();
                     }
                 }, new Consumer<Throwable>() {
