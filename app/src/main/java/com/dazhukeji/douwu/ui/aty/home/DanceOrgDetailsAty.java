@@ -318,8 +318,10 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
         mList.clear();
         List<OrganizationFindBean.DataBean.VideosBean> videos = GsonUtil.getObjectList(data.get("videos"), OrganizationFindBean.DataBean.VideosBean.class);
         mList.addAll(videos);
-        mVideoAdpater = new VideoAdpater(R.layout.video_item, mList, mContext);
-        videoRecyclerView.setAdapter(mVideoAdpater);
+        if (!StringUtils.isEmpty(mList)) {
+            mVideoAdpater = new VideoAdpater(R.layout.video_item, mList, mContext);
+            videoRecyclerView.setAdapter(mVideoAdpater);
+        }
     }
 
     private void setGroupDevice(OrganizationFindBean.DataBean.BasicBean basic) {

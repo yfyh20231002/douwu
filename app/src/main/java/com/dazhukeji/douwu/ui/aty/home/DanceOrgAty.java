@@ -2,7 +2,6 @@ package com.dazhukeji.douwu.ui.aty.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,7 +27,6 @@ import com.dazhukeji.douwu.manager.RecyclerViewManager;
 import com.dazhukeji.douwu.presenter.DanceTypePresenter;
 import com.dazhukeji.douwu.presenter.home.organization.OrganizationPresenter;
 import com.dazhukeji.douwu.view.MyEditText;
-import com.zhangyunfei.mylibrary.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,6 +148,9 @@ public class DanceOrgAty extends BaseAty<OrganizationPresenter> implements Organ
     public void danceTypeSuccess(DanceTypeBean danceTypeBean) {
         mRecyclerViewManager = new RecyclerViewManager(titlesRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
+        if (null != titleList && titleList.size()>0){
+            titleList.clear();
+        }
         titleList.addAll(danceTypeBean.getData());
         mTitlesAdapter = new TitlesAdapter(R.layout.home_title_item, titleList);
         titlesRecyclerView.setAdapter(mTitlesAdapter);

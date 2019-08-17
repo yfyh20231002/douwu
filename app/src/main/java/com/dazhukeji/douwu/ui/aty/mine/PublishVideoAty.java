@@ -140,7 +140,7 @@ public class PublishVideoAty extends BaseAty implements DanceTypeContract.View, 
                 mTitlesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                        mTitlesAdapter.setSelectPosition(position);
+                        mTitlesAdapter.setSelectPosition(position);
                         dance_type_id = mTitleList.get(position).getDance_type_id();
                     }
                 });

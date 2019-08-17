@@ -81,8 +81,8 @@ dependencies {
     implementation project(':calendarview')
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation project(':pickerview')
-    implementation 'cn.jiguang.sdk:jmessage:2.8.0'  // 此处以JMessage 2.8.0 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.2.6'  // 此处以JCore 1.2.6 版本为例。
+    compile  'cn.jiguang.sdk:jmessage:2.9.0'  // 此处以JMessage 2.9.0 版本为例。
+    compile  'cn.jiguang.sdk:jcore:2.0.0'  // 此处以JCore 2.0.0 版本为例。
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 
     implementation 'com.orhanobut:logger:2.2.0'

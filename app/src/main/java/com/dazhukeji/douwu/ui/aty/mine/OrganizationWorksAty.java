@@ -186,6 +186,7 @@ public class OrganizationWorksAty extends BaseAty {
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("file_id", String.valueOf(file.get(position).get("file_id")));
+                                    bundle.putString("fileType", "1");
                                     startActivity(VideoDetailsAty.class, bundle);
                                 }
                             });

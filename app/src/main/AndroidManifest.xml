@@ -44,6 +44,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <service android:name=".service.PushService"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

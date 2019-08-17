@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="14dp">
 
     <FrameLayout
@@ -47,12 +48,14 @@
             android:id="@+id/name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="21dp"
             android:layout_toRightOf="@id/head_img"
-            android:text="艰苦艰苦拮抗剂"
-            android:maxLines="2"
             android:maxWidth="60dp"
+            android:maxLines="2"
+            android:text="艰苦艰苦拮抗剂"
             android:textColor="#ffe2e2e2"
             android:textSize="12sp" />
 
@@ -85,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/head_img"
             android:layout_marginTop="9dp"
-            android:text="#双人舞 挑战自我极限"
+            tools:text="#双人舞 挑战自我极限"
             android:textColor="#ffeaeaea"
             android:textSize="15sp" />
     </RelativeLayout>

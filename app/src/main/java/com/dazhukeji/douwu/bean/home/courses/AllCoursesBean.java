@@ -114,6 +114,7 @@ public class AllCoursesBean extends BaseBean {
              * curriculum_start_time : 6554566
              * curriculum_over_time : 98765466
              * curriculum_identity_type : 1
+             * curriculum_effective
              */
 
             private int curriculum_id;
@@ -122,9 +123,38 @@ public class AllCoursesBean extends BaseBean {
             private String curriculum_photo;
             private int curriculum_actual_price;
             private String curriculum_difficulty;
-            private int curriculum_start_time;
-            private int curriculum_over_time;
+            private long curriculum_start_time;
+            private long curriculum_over_time;
             private int curriculum_identity_type;
+            private int curriculum_effective;
+
+            public void setCurriculum_start_time(long curriculum_start_time) {
+                this.curriculum_start_time = curriculum_start_time;
+            }
+
+            public void setCurriculum_over_time(long curriculum_over_time) {
+                this.curriculum_over_time = curriculum_over_time;
+            }
+
+            public void setCurriculum_difficulty(String curriculum_difficulty) {
+                this.curriculum_difficulty = curriculum_difficulty;
+            }
+
+            public long getCurriculum_start_time() {
+                return curriculum_start_time;
+            }
+
+            public long getCurriculum_over_time() {
+                return curriculum_over_time;
+            }
+
+            public int getCurriculum_effective() {
+                return curriculum_effective;
+            }
+
+            public void setCurriculum_effective(int curriculum_effective) {
+                this.curriculum_effective = curriculum_effective;
+            }
 
             public int getCurriculum_id() {
                 return curriculum_id;
@@ -170,21 +200,6 @@ public class AllCoursesBean extends BaseBean {
                 return curriculum_difficulty;
             }
 
-            public void setCurriculum_difficulty(String curriculum_difficulty) {
-                this.curriculum_difficulty = curriculum_difficulty;
-            }
-
-            public int getCurriculum_start_time() {
-                return curriculum_start_time;
-            }
-
-            public void setCurriculum_start_time(int curriculum_start_time) {
-                this.curriculum_start_time = curriculum_start_time;
-            }
-
-            public int getCurriculum_over_time() {
-                return curriculum_over_time;
-            }
 
             public void setCurriculum_over_time(int curriculum_over_time) {
                 this.curriculum_over_time = curriculum_over_time;

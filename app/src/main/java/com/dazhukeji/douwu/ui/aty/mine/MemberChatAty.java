@@ -58,7 +58,7 @@ public class MemberChatAty extends BaseAty {
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     Conversation conversation = mList.get(position);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("Conversation",conversation);
+                    bundle.putString("targetId",conversation.getTargetId());
                     startActivity(MemberChatDetailsAty.class,bundle);
                 }
             });

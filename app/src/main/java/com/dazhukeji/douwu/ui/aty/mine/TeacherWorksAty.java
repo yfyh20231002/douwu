@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,7 @@ public class TeacherWorksAty extends BaseAty {
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> map = new HashMap<>();
         map.put("user_token", ApiConfig.getToken());
+        map.put("paging", "1");
         Observable<ResponseBody> observable = apiService.postUserTeacherVideosList(map);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,6 +162,7 @@ public class TeacherWorksAty extends BaseAty {
                                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("file_id", String.valueOf(file.get(position).get("file_id")));
+                                    bundle.putString("fileType", "1");
                                     startActivity(VideoDetailsAty.class, bundle);
                                 }
                             });
@@ -169,6 +172,7 @@ public class TeacherWorksAty extends BaseAty {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e("yunfei", "onError: "+e.getMessage() );
                     }
 
                     @Override

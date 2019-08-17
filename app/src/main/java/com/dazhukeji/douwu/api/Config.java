@@ -75,8 +75,9 @@ public class Config {
     }
 
 
-    public static void getAppkey(){
-        SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGAPPKEY,"");
+    public static String getAppkey(){
+       String appKey = SharedPreferencesUtils.getInstance(ActivityStack.getInstance().topActivity()).getString(ApiConfig.JIGUANGAPPKEY,"");
+       return appKey;
     }
 
 

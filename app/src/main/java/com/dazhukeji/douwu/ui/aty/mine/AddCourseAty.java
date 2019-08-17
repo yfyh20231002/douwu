@@ -310,6 +310,7 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                 mTitlesAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        mTitlesAdapter.setSelectPosition(position);
                         dance_type_id = mTitleList.get(position).getDance_type_id();
                     }
                 });

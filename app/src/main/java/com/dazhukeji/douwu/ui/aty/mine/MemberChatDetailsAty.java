@@ -7,17 +7,21 @@ import android.widget.Toast;
 
 import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.adapter.ChatInfoAdpter;
+import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
 import com.dazhukeji.douwu.manager.RecyclerViewManager;
 import com.zhangyunfei.mylibrary.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.content.TextContent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.android.api.options.MessageSendingOptions;
 import cn.jpush.im.api.BasicCallback;
 
 /**
@@ -37,8 +41,10 @@ public class MemberChatDetailsAty extends BaseAty {
     EditText contentEdit;
 
     private RecyclerViewManager mRecyclerViewManager;
-    private List<Message> mList;
+    private List<Message> mList = new ArrayList<>();
     private Conversation mConversation;
+    private ChatInfoAdpter mChatInfoAdpter;
+    private String mTargetId;
 
     @Override
     public int getLayoutId() {
@@ -52,7 +58,6 @@ public class MemberChatDetailsAty extends BaseAty {
 //        for (int i = 0; i < 5; i++) {
 //            mList.add(new Object());
 //        }
-        mConversation = (Conversation) getIntent().getSerializableExtra("Conversation");
         //        mRecyclerViewManager = new RecyclerViewManager(headsRecyclerView);
         //        mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
         //        headsRecyclerView.setAdapter(new ChatHeadsAdapter(R.layout.heads_item,mList));
@@ -65,13 +70,22 @@ public class MemberChatDetailsAty extends BaseAty {
         //                }
         //            }
         //        });
+
         mRecyclerViewManager = new RecyclerViewManager(chatInfoRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.VERTICAL);
-        mList = mConversation.getAllMessage();
-        if (null != mList && mList.size()>0){
-            chatInfoRecyclerView.setAdapter(new ChatInfoAdpter(R.layout.chat_info_item, mList));
-        }
+        mChatInfoAdpter = new ChatInfoAdpter(R.layout.chat_info_item, mList);
+        chatInfoRecyclerView.setAdapter(mChatInfoAdpter);
 
+        mTargetId = getIntent().getStringExtra("targetId");
+        getData();
+    }
+
+    private void getData(){
+        mConversation = JMessageClient.getSingleConversation(mTargetId, Config.getAppkey());
+        List<Message> allMessage = mConversation.getAllMessage();
+        if (null != allMessage && allMessage.size()>0){
+            mChatInfoAdpter.setNewData(allMessage);
+        }
     }
 
     @Override
@@ -83,20 +97,26 @@ public class MemberChatDetailsAty extends BaseAty {
     public void onViewClicked() {
         String content = contentEdit.getText().toString();
         if (!StringUtils.isEmpty(content)){
-            Message message = Message.fromJson(content);
+            Message message = mConversation.createSendMessage(new TextContent(content));
             message.setOnSendCompleteCallback(new BasicCallback() {
                 @Override
                 public void gotResult(int responseCode, String responseDesc) {
                     if (responseCode == 0) {
                         //消息发送成功
                         Toast.makeText(MemberChatDetailsAty.this, "消息发送成功", Toast.LENGTH_SHORT).show();
+                        getData();
                     } else {
                         //消息发送失败
                         Toast.makeText(MemberChatDetailsAty.this, "消息发送失败", Toast.LENGTH_SHORT).show();
                     }
+                    contentEdit.getText().clear();
                 }
             });
-            JMessageClient.sendMessage(message);
+
+            MessageSendingOptions options = new MessageSendingOptions();
+            options.setRetainOffline(false);
+
+            JMessageClient.sendMessage(message);//使用默认控制参数发送消息
         }else {
             Toast.makeText(this, "发送内容不能为空", Toast.LENGTH_SHORT).show();
         }

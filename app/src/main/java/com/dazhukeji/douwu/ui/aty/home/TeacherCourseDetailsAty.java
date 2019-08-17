@@ -14,6 +14,7 @@ import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.DateUtils;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.im.android.api.model.Conversation;
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 import io.reactivex.Observable;
@@ -82,6 +84,7 @@ public class TeacherCourseDetailsAty extends BaseAty {
 
     private String mCurriculum_id;
     private String mUser_teacher_id;
+    private String mUserName;
 
     @Override
     public int getLayoutId() {
@@ -150,6 +153,12 @@ public class TeacherCourseDetailsAty extends BaseAty {
                         Map<String, String> map = Config.getMap(responseBody);
                         Map<String, String> data = JSONUtils.parseKeyAndValueToMap(map.get("data"));
                         Map<String, String> curriculum = JSONUtils.parseKeyAndValueToMap(data.get("curriculum"));
+                        if (data.containsKey("jmphone")){
+                            Map<String, String> jmphone = JSONUtils.parseKeyAndValueToMap(data.get("jmphone"));
+                            if (jmphone.containsKey("user_phone")){
+                                mUserName = jmphone.get("user_phone");
+                            }
+                        }
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_introduce_picture")).into(coverImg);
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_photo")).circleCrop().into(headImg);
                         titleTv.setText(curriculum.get("curriculum_name"));
@@ -161,23 +170,25 @@ public class TeacherCourseDetailsAty extends BaseAty {
 //                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"));
 //                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
 //                        }
-                        if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_photo")){
+                        if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_introduce_picture")){
                             videoplayer.setUp(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_video")
                                     , "", Jzvd.SCREEN_WINDOW_NORMAL);
-                            GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_photo")).into(videoplayer.thumbImageView);
+                            GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_introduce_picture")).into(videoplayer.thumbImageView);
 
                         }
                         difficultyTv.setText(curriculum.get("curriculum_difficulty"));
-                        numTv.setText(curriculum.get("now_people_number") + "人购买");
+                        numTv.setText(curriculum.get("curriculum_buy_number") + "人购买");
                         courseDetailsTv.setText(curriculum.get("curriculum_details"));
 //                        phoneTv.setText(curriculum.get("organization_service"));
 
                         priceTv.setText(curriculum.get("curriculum_actual_price"));
 
                         if (Double.parseDouble(data.get("collect_state")) == 1) {
+                            collectTv.setVisibility(View.GONE);
                             cancelCollectTv.setVisibility(View.VISIBLE);
                         } else {
                             collectTv.setVisibility(View.VISIBLE);
+                            cancelCollectTv.setVisibility(View.GONE);
                         }
 
                     }
@@ -203,6 +214,9 @@ public class TeacherCourseDetailsAty extends BaseAty {
                 cancelState(2);
                 break;
             case R.id.letterImg:
+                if (!StringUtils.isEmpty(mUserName)){
+                    Conversation.createSingleConversation(mUserName, Config.getAppkey());
+                }
                 break;
             case R.id.price_linearLayout:
 //                startActivity(PayDialogAty.class);

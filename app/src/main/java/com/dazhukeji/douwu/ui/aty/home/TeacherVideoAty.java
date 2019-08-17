@@ -76,6 +76,7 @@ public class TeacherVideoAty extends BaseAty{
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("user_teacher_id", mUser_teacher_id);
+        requestMap.put("paging", "1");
         Observable<ResponseBody> observable = apiService.postTeacherVideosList(requestMap);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
