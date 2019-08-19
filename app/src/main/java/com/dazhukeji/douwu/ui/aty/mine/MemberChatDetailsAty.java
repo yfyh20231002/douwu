@@ -1,5 +1,7 @@
 package com.dazhukeji.douwu.ui.aty.mine;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.content.TextContent;
+import cn.jpush.im.android.api.event.MessageEvent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.options.MessageSendingOptions;
@@ -52,12 +55,20 @@ public class MemberChatDetailsAty extends BaseAty {
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        JMessageClient.registerEventReceiver(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        JMessageClient.unRegisterEventReceiver(this);
+        super.onDestroy();
+    }
+
+    @Override
     public void initView() {
-//        txtTitle.setText("How are you doing");
-//        mList = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            mList.add(new Object());
-//        }
+        txtTitle.setText("我的聊天");
         //        mRecyclerViewManager = new RecyclerViewManager(headsRecyclerView);
         //        mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
         //        headsRecyclerView.setAdapter(new ChatHeadsAdapter(R.layout.heads_item,mList));
@@ -85,6 +96,7 @@ public class MemberChatDetailsAty extends BaseAty {
         List<Message> allMessage = mConversation.getAllMessage();
         if (null != allMessage && allMessage.size()>0){
             mChatInfoAdpter.setNewData(allMessage);
+            chatInfoRecyclerView.scrollToPosition(mChatInfoAdpter.getItemCount()-1);
         }
     }
 
@@ -121,5 +133,19 @@ public class MemberChatDetailsAty extends BaseAty {
             Toast.makeText(this, "发送内容不能为空", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    //用户在线期间收到的消息都会以MessageEvent的方式上抛
+    public void onEvent(MessageEvent event) {
+        Message msg = event.getMessage();
+
+        switch (msg.getContentType()) {
+            case text:
+                //处理文字消息
+                TextContent textContent = (TextContent) msg.getContent();
+                textContent.getText();
+                break;
+        }
     }
 }

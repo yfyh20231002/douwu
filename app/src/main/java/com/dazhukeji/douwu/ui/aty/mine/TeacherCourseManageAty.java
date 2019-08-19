@@ -16,10 +16,12 @@ import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
 import com.dazhukeji.douwu.manager.RecyclerViewManager;
 import com.dazhukeji.douwu.ui.aty.home.TeacherCourseDetailsAty;
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.DateUtils;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
+import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +55,7 @@ public class TeacherCourseManageAty extends BaseAty {
 
     private CourseAdapter mCourseAdapter;
     private RecyclerViewManager mRecyclerViewManager;
+    private int pos= 0;
 
     @Override
     public int getLayoutId() {
@@ -70,7 +73,7 @@ public class TeacherCourseManageAty extends BaseAty {
 
     @Override
     public void initData() {
-        swithLine(0);
+        swithLine();
     }
 
     @OnClick({R.id.editTv,R.id.layout1, R.id.layout2})
@@ -86,21 +89,23 @@ public class TeacherCourseManageAty extends BaseAty {
                 }
                 break;
             case R.id.layout1:
-                swithLine(0);
+                pos = 0;
+                swithLine();
                 break;
             case R.id.layout2:
-                swithLine(1);
+                pos = 1;
+                swithLine();
                 break;
         }
     }
 
-    private void swithLine(int i){
+    private void swithLine(){
         line1.setVisibility(View.INVISIBLE);
         line2.setVisibility(View.INVISIBLE);
-        if (i==0){
+        if (pos==0){
             sell();
             line1.setVisibility(View.VISIBLE);
-        }else if (i ==1){
+        }else if (pos ==1){
             stopSell();
             line2.setVisibility(View.VISIBLE);
         }
@@ -121,15 +126,29 @@ public class TeacherCourseManageAty extends BaseAty {
                         ArrayList<Map<String, String>> arrayList = JSONUtils.parseKeyAndValueToMapList(data.get("curriculum"));
                         if (arrayList!= null && arrayList.size()>0){
                             courseRecyclerView.setVisibility(View.VISIBLE);
-                            mCourseAdapter = new CourseAdapter(R.layout.item_course_manage, arrayList);
+                            mCourseAdapter = new CourseAdapter(R.layout.item_course_manage, arrayList,0);
                             courseRecyclerView.setAdapter(mCourseAdapter);
-                            mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                            mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                                @Override
+//                                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                                    Bundle bundle = new Bundle();
+//                                    bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
+//                                    bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
+//                                    startActivity(TeacherCourseDetailsAty.class, bundle);
+//                                }
+//                            });
+                            mCourseAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                                 @Override
-                                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
-                                    bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
-                                    startActivity(TeacherCourseDetailsAty.class, bundle);
+                                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                    if (view.getId() == R.id.contentLayout ){
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
+                                        bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
+                                        startActivity(TeacherCourseDetailsAty.class, bundle);
+                                    }
+                                    if (view.getId() == R.id.stateTv ){
+                                        caozuo("2",arrayList.get(position).get("curriculum_id"));
+                                    }
                                 }
                             });
                         }else {
@@ -165,15 +184,29 @@ public class TeacherCourseManageAty extends BaseAty {
                         ArrayList<Map<String, String>> arrayList = JSONUtils.parseKeyAndValueToMapList(data.get("curriculum"));
                         if (arrayList!= null && arrayList.size()>0){
                             courseRecyclerView.setVisibility(View.VISIBLE);
-                            mCourseAdapter = new CourseAdapter(R.layout.item_course_manage, arrayList);
+                            mCourseAdapter = new CourseAdapter(R.layout.item_course_manage, arrayList,1);
                             courseRecyclerView.setAdapter(mCourseAdapter);
-                            mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                            mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//                                @Override
+//                                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                                    Bundle bundle = new Bundle();
+//                                    bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
+//                                    bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
+//                                    startActivity(TeacherCourseDetailsAty.class, bundle);
+//                                }
+//                            });
+                            mCourseAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                                 @Override
-                                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
-                                    bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
-                                    startActivity(TeacherCourseDetailsAty.class, bundle);
+                                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                                    if (view.getId() == R.id.contentLayout ){
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
+                                        bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
+                                        startActivity(TeacherCourseDetailsAty.class, bundle);
+                                    }
+                                    if (view.getId() == R.id.stateTv ){
+                                        caozuo("1",arrayList.get(position).get("curriculum_id"));
+                                    }
                                 }
                             });
                         }else {
@@ -192,12 +225,57 @@ public class TeacherCourseManageAty extends BaseAty {
                 });
     }
 
+    /**
+     *
+     * @param type  1：上架2：下架
+     * @param curriculum_id  课程id
+     */
+    private void caozuo(String type,String curriculum_id){
+        ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_token", ApiConfig.getToken());
+        map.put("curriculum_id", curriculum_id);
+        map.put("identity_type","1");
+        map.put("operation_type", type);
+        Observable<ResponseBody> observable = apiService.postTeacherCurriculumStateUpdate(map);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<ResponseBody>() {
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        /**
+                         * {
+                         "code": 0,
+                         "msg": "信息查询失败",
+                         "data": ""
+                         }
+                         */
+                        Map<String, String> stringMap = Config.getMap(responseBody);
+                        ToastUtils.showToast(stringMap.get("msg"));
+                        if (stringMap.get("code").equals("1")){
+                            swithLine();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 
     public class CourseAdapter extends BaseQuickAdapter<Map<String, String>, BaseViewHolder> {
 
-
-        public CourseAdapter(int layoutResId, @Nullable List<Map<String, String>> data) {
+        private int state;
+        public CourseAdapter(int layoutResId, @Nullable List<Map<String, String>> data,int state) {
             super(layoutResId, data);
+            this.state = state;
         }
 
         @Override
@@ -216,6 +294,16 @@ public class TeacherCourseManageAty extends BaseAty {
             }
             helper.setText(R.id.difficultyTv, item.get("curriculum_difficulty"));
             helper.setText(R.id.priceTv, item.get("curriculum_actual_price"));
+
+            SwipeMenuLayout layout = helper.getView(R.id.rootLayout);
+            layout.setIos(true).setLeftSwipe(true).setSwipeEnable(true);
+            if (state == 0){
+                helper.setText(R.id.stateTv, "下架");
+            }else {
+                helper.setText(R.id.stateTv, "上架");
+            }
+            helper.addOnClickListener(R.id.contentLayout);
+            helper.addOnClickListener(R.id.stateTv);
         }
 
     }

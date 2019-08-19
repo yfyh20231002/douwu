@@ -7,8 +7,10 @@ import android.widget.LinearLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dazhukeji.douwu.R;
+import com.zhangyunfei.mylibrary.utils.JSONUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.jpush.im.android.api.model.Message;
 
@@ -27,14 +29,16 @@ public class ChatInfoAdpter extends BaseQuickAdapter<Message,BaseViewHolder> {
     protected void convert(BaseViewHolder helper, Message item) {
         LinearLayout leftLinearLayout=helper.getView(R.id.leftLinearLayout);
         LinearLayout rightLinearLayout=helper.getView(R.id.rightLinearLayout);
+        Map<String, String> map = JSONUtils.parseKeyAndValueToMap(item.getContent().toJson());
         if (helper.getLayoutPosition()%2==0){
             leftLinearLayout.setVisibility(View.VISIBLE);
             rightLinearLayout.setVisibility(View.GONE);
-            helper.setText(R.id.leftText,item.getContent().toJson());
+            helper.setText(R.id.leftText,map.get("text"));
         }else {
             leftLinearLayout.setVisibility(View.GONE);
             rightLinearLayout.setVisibility(View.VISIBLE);
-            helper.setText(R.id.rightText,item.getContent().toJson());
+
+            helper.setText(R.id.rightText,map.get("text"));
         }
 
     }

@@ -1,5 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.home;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
+import com.dazhukeji.douwu.ui.aty.mine.MemberChatDetailsAty;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.DateUtils;
@@ -215,7 +217,10 @@ public class TeacherCourseDetailsAty extends BaseAty {
                 break;
             case R.id.letterImg:
                 if (!StringUtils.isEmpty(mUserName)){
-                    Conversation.createSingleConversation(mUserName, Config.getAppkey());
+                    Conversation singleConversation = Conversation.createSingleConversation(mUserName, Config.getAppkey());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("targetId",singleConversation.getTargetId());
+                    startActivity(MemberChatDetailsAty.class,bundle);
                 }
                 break;
             case R.id.price_linearLayout:

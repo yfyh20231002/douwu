@@ -502,4 +502,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("organization/organization_curriculum_state_update.html")
     Observable<ResponseBody> postOrganizationCurriculumStateUpdate(@FieldMap Map<String, String> map);
+
+
+    @FormUrlEncoded
+    @POST("Common/curriculum_operation.html")
+    Observable<ResponseBody> postTeacherCurriculumStateUpdate(@FieldMap Map<String, String> map);
 }
