@@ -172,12 +172,14 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                     startYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
                     startMonth.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
                     startDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-                    mStartDate = format;
+//                    mStartDate = format;
+                    mStartDate = String.valueOf(date.getTime());
                 } else if (t == 2) {
                     endYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
                     endMonth.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
                     endDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-                    mEndDate = format;
+//                    mEndDate = format;
+                    mEndDate = String.valueOf(date.getTime());
                 }
 
             }
