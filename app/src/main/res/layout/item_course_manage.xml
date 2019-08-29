@@ -98,6 +98,7 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/tipTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="出售中"

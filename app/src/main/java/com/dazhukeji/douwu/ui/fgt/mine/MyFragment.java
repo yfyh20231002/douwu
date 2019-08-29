@@ -132,18 +132,22 @@ public class MyFragment extends BaseFgt{
                             Map<String, String> data = JSONUtils.parseKeyAndValueToMap(stringMap.get("data"));
                             Map<String, String> user = JSONUtils.parseKeyAndValueToMap(data.get("user"));
                             int user_role = Integer.parseInt(user.get("user_role"));
+                            //1用户2教师3机构
                             if (user_role == 1){
                                 organizationLinearLayout.setVisibility(View.GONE);
                                 teacherLinearLayout.setVisibility(View.GONE);
                                 memberFreeEnterLinearLayout.setVisibility(View.VISIBLE);
+                                logoImg.setImageResource(0);
                             }else if (user_role == 2){
                                 organizationLinearLayout.setVisibility(View.GONE);
                                 teacherLinearLayout.setVisibility(View.VISIBLE);
                                 memberFreeEnterLinearLayout.setVisibility(View.INVISIBLE);
+                                logoImg.setImageResource(R.drawable.icon_mine_organization);
                             }else if (user_role == 3){
                                 organizationLinearLayout.setVisibility(View.VISIBLE);
                                 teacherLinearLayout.setVisibility(View.GONE);
                                 memberFreeEnterLinearLayout.setVisibility(View.INVISIBLE);
+                                logoImg.setImageResource(R.drawable.icon_mine_people);
                             }
                             String user_portrait = user.get("user_portrait");
                             if (!TextUtils.isEmpty(user_portrait)){

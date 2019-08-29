@@ -1,5 +1,6 @@
 package com.dazhukeji.douwu.ui.aty.home;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,10 +10,12 @@ import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
+import com.dazhukeji.douwu.ui.aty.mine.MemberChatDetailsAty;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
+import com.zhangyunfei.mylibrary.utils.StringUtils;
 import com.zhangyunfei.mylibrary.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -20,6 +23,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.im.android.api.model.Conversation;
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
 import io.reactivex.Observable;
@@ -81,6 +85,7 @@ public class CourseDetailsAty extends BaseAty {
 
     private String mCurriculum_id;
     private String mUser_teacher_id;
+    private String mUserName;
 
     @Override
     public int getLayoutId() {
@@ -145,6 +150,9 @@ public class CourseDetailsAty extends BaseAty {
                          */
                         Map<String, String> map = Config.getMap(responseBody);
                         Map<String, String> data = JSONUtils.parseKeyAndValueToMap(map.get("data"));
+                        if (data.containsKey("jmphone")){
+                            mUserName = data.get("jmphone");
+                        }
                         Map<String, String> curriculum = JSONUtils.parseKeyAndValueToMap(data.get("curriculum"));
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_introduce_picture")).into(coverImg);
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_photo")).circleCrop().into(headImg);
@@ -200,6 +208,12 @@ public class CourseDetailsAty extends BaseAty {
                 cancelState(2);
                 break;
             case R.id.letterImg:
+                if (!StringUtils.isEmpty(mUserName)){
+                    Conversation singleConversation = Conversation.createSingleConversation(mUserName, Config.getAppkey());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("targetId",singleConversation.getTargetId());
+                    startActivity(MemberChatDetailsAty.class,bundle);
+                }
                 break;
             case R.id.price_linearLayout:
 //                startActivity(PayDialogAty.class);

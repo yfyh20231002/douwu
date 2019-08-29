@@ -298,8 +298,10 @@ public class TeacherCourseManageAty extends BaseAty {
             SwipeMenuLayout layout = helper.getView(R.id.rootLayout);
             layout.setIos(true).setLeftSwipe(true).setSwipeEnable(true);
             if (state == 0){
+                helper.setText(R.id.tipTv,"出售中");
                 helper.setText(R.id.stateTv, "下架");
             }else {
+                helper.setText(R.id.tipTv,"已下架");
                 helper.setText(R.id.stateTv, "上架");
             }
             helper.addOnClickListener(R.id.contentLayout);
