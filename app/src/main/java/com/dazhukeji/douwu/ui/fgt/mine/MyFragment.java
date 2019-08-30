@@ -142,7 +142,7 @@ public class MyFragment extends BaseFgt{
                                 organizationLinearLayout.setVisibility(View.GONE);
                                 teacherLinearLayout.setVisibility(View.VISIBLE);
                                 memberFreeEnterLinearLayout.setVisibility(View.INVISIBLE);
-                                logoImg.setImageResource(R.drawable.icon_mine_organization);
+                                logoImg.setImageResource(R.drawable.mine_hourse);
                             }else if (user_role == 3){
                                 organizationLinearLayout.setVisibility(View.VISIBLE);
                                 teacherLinearLayout.setVisibility(View.GONE);
