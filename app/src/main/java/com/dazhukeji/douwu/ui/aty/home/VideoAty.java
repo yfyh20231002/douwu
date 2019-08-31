@@ -70,7 +70,7 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
     private String mDance_type_id;
     private String mDistrict_id;
     private String mFile_category = "3";
-    private String mOrder = "1";
+    private String mOrder = "2";
     private DanceTypePresenter mDanceTypePresenter;
 
     @Override
@@ -174,7 +174,7 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
                             null, null, null);
                     selectTv.setCompoundDrawablePadding(2);
                     selectTv.setText("时间升序");
-                    mOrder = "1";
+                    mOrder = "2";
                     requestData();
                     mTimePopupWindow.dismiss();
                 }
@@ -189,7 +189,7 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
                             null, null, null);
                     selectTv.setCompoundDrawablePadding(2);
                     selectTv.setText("时间降序");
-                    mOrder = "2";
+                    mOrder = "1";
                     requestData();
                     mTimePopupWindow.dismiss();
                 }
@@ -335,6 +335,7 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
     public void refreshSplendVideo(SplendidVideoBean splendidVideoBean) {
         List<SplendidVideoBean.DataBean> data = splendidVideoBean.getData();
         if (data != null && data.size() > 0) {
+            videoRecyclerView.setVisibility(View.VISIBLE);
             mVideoAdpater = new VideoAdapter(R.layout.video_item, data, mContext);
             videoRecyclerView.setAdapter(mVideoAdpater);
             mVideoAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -346,6 +347,8 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
                     startActivity(VideoDetailsAty.class, bundle);
                 }
             });
+        }else {
+            videoRecyclerView.setVisibility(View.GONE);
         }
 
 

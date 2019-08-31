@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -121,6 +122,8 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
      */
     private String mFrom;
     private int dance_type_id;
+    private String mDifficulty = "初级难度";
+    private String mStatus = "1";
 
     @Override
     public int getLayoutId() {
@@ -142,6 +145,28 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
         titlesRecyclerView.setLayoutManager(gridLayoutManager);
         mUpLoadPresenter = new UpLoadPresenter();
         mUpLoadPresenter.attachView(this, mContext);
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.juniorRB) {
+                    mDifficulty = "初级进阶";
+                } else if (checkedId == R.id.middleRB) {
+                    mDifficulty = "中级进阶";
+                } else if (checkedId == R.id.seniorRB) {
+                    mDifficulty = "高级进阶";
+                }
+            }
+        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.alwaysRB) {
+                    mStatus = "1";
+                } else if (checkedId == R.id.customRB) {
+                    mStatus = "2";
+                }
+            }
+        });
     }
 
     /**
@@ -172,13 +197,13 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                     startYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
                     startMonth.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
                     startDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-//                    mStartDate = format;
+                    //                    mStartDate = format;
                     mStartDate = String.valueOf(date.getTime());
                 } else if (t == 2) {
                     endYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
                     endMonth.setText(String.valueOf(calendar.get(Calendar.MONTH) + 1));
                     endDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-//                    mEndDate = format;
+                    //                    mEndDate = format;
                     mEndDate = String.valueOf(date.getTime());
                 }
 
@@ -224,12 +249,12 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
     }
 
     private void confirm() {
-        if (StringUtils.isEmpty(courseTeacherEdit.getContent())||StringUtils.isEmpty(courseNameEdit.getContent())
-                ||StringUtils.isEmpty(imgPath)
-                ||StringUtils.isEmpty(courseEdit.getContent())
-                ||StringUtils.isEmpty(videoPath)
-                ||StringUtils.isEmpty(coursePriceEdit.getContent())
-        ){
+        if (StringUtils.isEmpty(courseTeacherEdit.getContent()) || StringUtils.isEmpty(courseNameEdit.getContent())
+                || StringUtils.isEmpty(imgPath)
+                || StringUtils.isEmpty(courseEdit.getContent())
+                || StringUtils.isEmpty(videoPath)
+                || StringUtils.isEmpty(coursePriceEdit.getContent())
+        ) {
             Toast.makeText(mContext, "请将信息填写完整", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -242,30 +267,8 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
         map.put("curriculum_details", courseEdit.getContent());
         map.put("curriculum_video", videoPath);
         map.put("curriculum_actual_price", coursePriceEdit.getContent());
-        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.juniorRB) {
-                    map.put("curriculum_difficulty", "初级进阶");
-                } else if (checkedId == R.id.middleRB) {
-                    map.put("curriculum_difficulty", "中级进阶");
-                } else if (checkedId == R.id.seniorRB) {
-                    map.put("curriculum_difficulty", "高级进阶");
-                }
-            }
-        });
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.alwaysRB) {
-                    map.put("curriculum_effective", "1");
-                } else if (checkedId == R.id.customRB) {
-                    map.put("curriculum_effective", "2");
-                }
-            }
-        });
-        map.put("curriculum_difficulty", "初级进阶");
-        map.put("curriculum_effective", "1");
+        map.put("curriculum_difficulty", mDifficulty);
+        map.put("curriculum_effective", mStatus);
         map.put("curriculum_start_time", mStartDate);
         map.put("curriculum_over_time", mEndDate);
         if (mTitleList != null) {
@@ -290,6 +293,7 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
 
                         @Override
                         public void onError(Throwable e) {
+                            Log.e("yunfei", e.toString());
                         }
 
                         @Override
@@ -334,23 +338,23 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                     File file = new File(path);
                     GlideApp.with(mContext).load(file).into(picImg);
                     //mUpLoadPresenter.postPic("headImg", file);
-                    mUpLoadPresenter.postFile("headImg",file,"3");
+                    mUpLoadPresenter.postFile("headImg", file, "3");
                 }
             } else {
                 Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
             }
         }
         if (resultCode == RESULT_OK && data != null && requestCode == Config.VIDEO_PICKER) {
-            File file = new File(MyUtils.getRealPath(AddCourseAty.this,data));
+            File file = new File(MyUtils.getRealPath(AddCourseAty.this, data));
             //mUpLoadPresenter.postVideo("video", file);
-            mUpLoadPresenter.postFile("video",file,"1");
+            mUpLoadPresenter.postFile("video", file, "1");
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mDanceTypePresenter != null){
+        if (mDanceTypePresenter != null) {
             mDanceTypePresenter.detachView();
         }
     }

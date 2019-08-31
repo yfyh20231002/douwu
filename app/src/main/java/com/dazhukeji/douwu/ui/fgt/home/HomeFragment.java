@@ -505,7 +505,6 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
 //        mDistrictBeanList.clear();
         mCurrentRegion = JSONUtils.parseKeyAndValueToMap(data.get("current_region"));
         district_id = mCurrentRegion.get("district_id");
-        district_id = "1";
         locationTv.setText(mCurrentRegion.get("district_name"));
 //        List<DistrictBean> district = data.getDistrict();
 //        mDistrictBeanList.addAll(district);
