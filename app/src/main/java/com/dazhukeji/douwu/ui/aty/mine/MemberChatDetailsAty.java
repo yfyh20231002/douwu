@@ -3,6 +3,7 @@ package com.dazhukeji.douwu.ui.aty.mine;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,24 +70,13 @@ public class MemberChatDetailsAty extends BaseAty {
     @Override
     public void initView() {
         txtTitle.setText("我的聊天");
-        //        mRecyclerViewManager = new RecyclerViewManager(headsRecyclerView);
-        //        mRecyclerViewManager.setLinearLayoutManager(RecyclerView.HORIZONTAL);
-        //        headsRecyclerView.setAdapter(new ChatHeadsAdapter(R.layout.heads_item,mList));
-        //        headsRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-        //            @Override
-        //            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        //                super.getItemOffsets(outRect, view, parent, state);
-        //                if (parent.getChildAdapterPosition(view)!=state.getItemCount()-1){
-        //                    outRect.right= DisplayHelper.dp2px(mContext,17);
-        //                }
-        //            }
-        //        });
         mRecyclerViewManager = new RecyclerViewManager(chatInfoRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.VERTICAL);
         mChatInfoAdpter = new ChatInfoAdpter(R.layout.chat_info_item, mList);
         chatInfoRecyclerView.setAdapter(mChatInfoAdpter);
 
         mTargetId = getIntent().getStringExtra("targetId");
+        Log.e("yunfei", "initView: "+mTargetId );
         getData();
     }
 
@@ -142,8 +132,9 @@ public class MemberChatDetailsAty extends BaseAty {
         switch (msg.getContentType()) {
             case text:
                 //处理文字消息
-                TextContent textContent = (TextContent) msg.getContent();
-                textContent.getText();
+//                TextContent textContent = (TextContent) msg.getContent();
+//                textContent.getText();
+                getData();
                 break;
         }
     }

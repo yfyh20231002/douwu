@@ -17,6 +17,7 @@ import java.util.Map;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.enums.MessageDirect;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
 
@@ -36,7 +37,7 @@ public class ChatInfoAdpter extends BaseQuickAdapter<Message,BaseViewHolder> {
         LinearLayout leftLinearLayout=helper.getView(R.id.leftLinearLayout);
         LinearLayout rightLinearLayout=helper.getView(R.id.rightLinearLayout);
         Map<String, String> map = JSONUtils.parseKeyAndValueToMap(item.getContent().toJson());
-        if (helper.getLayoutPosition()%2==0){
+        if (item.getDirect() == MessageDirect.receive){
             leftLinearLayout.setVisibility(View.VISIBLE);
             rightLinearLayout.setVisibility(View.GONE);
             helper.setText(R.id.leftText,map.get("text"));
