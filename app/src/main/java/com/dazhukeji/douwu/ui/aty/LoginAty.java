@@ -34,7 +34,7 @@ import cn.jpush.im.api.BasicCallback;
  * 创建时间：2018/11/27 14:08
  * 功能描述：
  */
-public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.View{
+public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.View {
     @BindView(R.id.phoneEdit)
     MyEditText phoneEdit;
     @BindView(R.id.codeEdit)
@@ -72,7 +72,7 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
     }
 
 
-    @OnClick({R.id.sendCodeTv,R.id.forgetTv, R.id.confirmTv, R.id.tipTv})
+    @OnClick({R.id.sendCodeTv, R.id.forgetTv, R.id.confirmTv, R.id.tipTv})
     public void onViewClicked(View view) {
         mPhone = phoneEdit.getContent();
         mPassword = passwordEdit.getContent();
@@ -80,19 +80,19 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
         String confirmContent = confirmTv.getText().toString();
         switch (view.getId()) {
             case R.id.sendCodeTv:
-                if (TextUtils.isEmpty(mPhone)){
+                if (TextUtils.isEmpty(mPhone)) {
                     ToastUtils.showToast("手机号不能为空");
                     return;
                 }
-                if (confirmContent.equals("立即注册")){
-                   mType="1";
-                }else {
-                    mType="2";
+                if (confirmContent.equals("立即注册")) {
+                    mType = "1";
+                } else {
+                    mType = "2";
                 }
-                Bundle bundle=new Bundle();
-                bundle.putString("phone",mPhone);
-                bundle.putString("type",mType);
-                startActivity(LoginDialogAty.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("phone", mPhone);
+                bundle.putString("type", mType);
+                startActivity(LoginDialogAty.class, bundle);
                 break;
             case R.id.forgetTv:
                 phoneEdit.setText("");
@@ -107,29 +107,29 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
                 passwordEdit.setHint("请输入新密码");
                 break;
             case R.id.confirmTv:
-                if (TextUtils.isEmpty(mPhone)){
+                if (TextUtils.isEmpty(mPhone)) {
                     ToastUtils.showToast("手机号不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(mPassword)){
+                if (TextUtils.isEmpty(mPassword)) {
                     ToastUtils.showToast("密码不能为空");
                     return;
                 }
 
-                if (confirmContent.equals("立即注册")){
-                    if (TextUtils.isEmpty(mCode)){
+                if (confirmContent.equals("立即注册")) {
+                    if (TextUtils.isEmpty(mCode)) {
                         ToastUtils.showToast("验证码不能为空");
                         return;
                     }
-                    ((LoginPresenter)mPresenter).postRegister(mPhone,mPassword,mCode);
-                }else if (confirmContent.equals("立即登录")){
-                    ((LoginPresenter)mPresenter).postLogin(mPhone,mPassword);
-                }else {
-                    if (TextUtils.isEmpty(mCode)){
+                    ((LoginPresenter) mPresenter).postRegister(mPhone, mPassword, mCode);
+                } else if (confirmContent.equals("立即登录")) {
+                    ((LoginPresenter) mPresenter).postLogin(mPhone, mPassword);
+                } else {
+                    if (TextUtils.isEmpty(mCode)) {
                         ToastUtils.showToast("验证码不能为空");
                         return;
                     }
-                    ((LoginPresenter)mPresenter).postForget(mPhone,mPassword,mCode);
+                    ((LoginPresenter) mPresenter).postForget(mPhone, mPassword, mCode);
                 }
                 break;
             case R.id.tipTv:
@@ -162,7 +162,7 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
         }
     }
 
-    private void setTipTv(){
+    private void setTipTv() {
         SpannableString spannableString = new SpannableString(tips);
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#37C8F8")), tips.length() - 4, tips.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tipTv.setText(spannableString);
@@ -180,13 +180,6 @@ public class LoginAty extends BaseAty<LoginPresenter> implements LoginContract.V
                 if (responseCode == 0) {
                     Config.setCachedPsw(data.get("jmpassword"));
                     UserInfo myInfo = JMessageClient.getMyInfo();
-                    File avatarFile = myInfo.getAvatarFile();
-                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
-                    if (avatarFile != null) {
-                        Config.setUserHead(avatarFile.getAbsolutePath());
-                    } else {
-                        Config.setUserHead(null);
-                    }
                     String username = myInfo.getUserName();
                     String appKey = myInfo.getAppKey();
                     Config.setusername(username);

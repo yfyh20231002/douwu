@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dazhukeji.douwu.R;
-import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class MemberChatAdpater extends BaseQuickAdapter<Conversation,BaseViewHol
         JMessageClient.getUserInfo(item.getTargetId(), item.getTargetAppKey(), new GetUserInfoCallback() {
             @Override
             public void gotResult(int i, String s, UserInfo userInfo) {
-                GlideApp.with(headImg.getContext()).load(ApiConfig.BASE_IMG_URL+userInfo.getAvatar()).circleCrop().into(headImg);
+                GlideApp.with(headImg.getContext()).load(userInfo.getAvatarFile()).circleCrop().into(headImg);
                 helper.setText(R.id.nameTv,userInfo.getUserName());
             }
         });

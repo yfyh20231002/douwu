@@ -81,7 +81,6 @@ public class MemberChatDetailsAty extends BaseAty {
         //                }
         //            }
         //        });
-
         mRecyclerViewManager = new RecyclerViewManager(chatInfoRecyclerView);
         mRecyclerViewManager.setLinearLayoutManager(RecyclerView.VERTICAL);
         mChatInfoAdpter = new ChatInfoAdpter(R.layout.chat_info_item, mList);
@@ -148,4 +147,7 @@ public class MemberChatDetailsAty extends BaseAty {
                 break;
         }
     }
+
+
+
 }
