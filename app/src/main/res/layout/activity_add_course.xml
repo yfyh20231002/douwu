@@ -156,7 +156,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="预约时间"
+                    android:text="课程时长"
                     android:textColor="#ffdbdee7"
                     android:textSize="14sp" />
 
@@ -175,7 +175,7 @@
                         android:checked="true"
                         android:drawablePadding="6dp"
                         android:drawableStart="@drawable/selector_choose_date"
-                        android:text="长期有效"
+                        android:text="长期课程"
                         android:textColor="#ffdbdee7"
                         android:textSize="12sp" />
 
@@ -187,7 +187,7 @@
                         android:button="@null"
                         android:drawablePadding="6dp"
                         android:drawableStart="@drawable/selector_choose_date"
-                        android:text="自定义日期"
+                        android:text="短期课程"
                         android:textColor="#ffdbdee7"
                         android:textSize="12sp" />
                 </RadioGroup>
@@ -211,7 +211,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="起始日期"
+                    android:text="开课日期"
                     android:textColor="#ffdbdee7"
                     android:textSize="14sp" />
 

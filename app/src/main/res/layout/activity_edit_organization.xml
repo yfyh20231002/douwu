@@ -303,13 +303,13 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
                     android:layout_height="match_parent">
+
                     <ImageView
                         android:id="@+id/videoImg"
                         android:layout_width="93dp"
-                        android:layout_marginTop="15dp"
                         android:layout_height="93dp"
-                        android:src="@drawable/icon_modify_head"
-                        />
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/icon_modify_head" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -123,20 +123,22 @@ public class CourseAty extends BaseAty<AllCoursesPresenter> implements AllCourse
     @Override
     public void refreshAllCourses(AllCoursesBean allCoursesBean) {
         List<AllCoursesBean.DataBean.CurriculumBean> curriculum = allCoursesBean.getData().getCurriculum();
-        if (paging == 1) {
-            mCurriculumBeanList.clear();
-        }
-        mCurriculumBeanList.addAll(curriculum);
-        mCourseAdapter = new CourseAdapter(R.layout.course_item, mCurriculumBeanList, mContext);
-        courseRecyclerView.setAdapter(mCourseAdapter);
-        mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("curriculum_id", String.valueOf(curriculum.get(position).getCurriculum_id()));
-                startActivity(CourseDetailsAty.class, bundle);
+        if (null != curriculum){
+            if (paging == 1) {
+                mCurriculumBeanList.clear();
             }
-        });
+            mCurriculumBeanList.addAll(curriculum);
+            mCourseAdapter = new CourseAdapter(R.layout.course_item, mCurriculumBeanList, mContext);
+            courseRecyclerView.setAdapter(mCourseAdapter);
+            mCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("curriculum_id", String.valueOf(curriculum.get(position).getCurriculum_id()));
+                    startActivity(CourseDetailsAty.class, bundle);
+                }
+            });
+        }
     }
 
 

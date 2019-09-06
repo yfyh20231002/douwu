@@ -121,6 +121,7 @@ public class CourseDetailsAty extends BaseAty {
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("curriculum_id", mCurriculum_id);
+        requestMap.put("user_token",ApiConfig.getToken());
         Observable<ResponseBody> observable = apiService.postCurriculumDetails(requestMap);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -165,6 +166,8 @@ public class CourseDetailsAty extends BaseAty {
 //                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"));
 //                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
 //                        }
+
+                        nameTv.setText(curriculum.get("curriculum_admin") +"\u3000"+curriculum.get("curriculum_name") );
                         if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_photo")){
                             videoplayer.setUp(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_video")
                                     , "", Jzvd.SCREEN_WINDOW_NORMAL);
@@ -175,7 +178,7 @@ public class CourseDetailsAty extends BaseAty {
                         difficultyTv.setText(curriculum.get("curriculum_difficulty"));
                         numTv.setText(curriculum.get("now_people_number") + "人购买");
                         courseDetailsTv.setText(curriculum.get("curriculum_details"));
-//                        phoneTv.setText(curriculum.get("organization_service"));
+                        phoneTv.setText(curriculum.get("curriculum_service"));
 
                         priceTv.setText(curriculum.get("curriculum_actual_price"));
 

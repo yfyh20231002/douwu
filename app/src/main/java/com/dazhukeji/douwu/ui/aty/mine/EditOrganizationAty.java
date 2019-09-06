@@ -3,6 +3,7 @@ package com.dazhukeji.douwu.ui.aty.mine;
 import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,9 @@ import com.zhangyunfei.mylibrary.utils.ToastUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -82,6 +85,8 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
     private String mBgPath;
     private String mVideoPath;
 
+    private Map<String,String> mStringMap;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_edit_organization;
@@ -91,8 +96,63 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
     public void initView() {
         mOrganization_id = getIntent().getStringExtra("organization_id");
         txtTitle.setText("编辑机构");
+        mStringMap = new HashMap<>();
         mUpLoadPresenter = new UpLoadPresenter();
         mUpLoadPresenter.attachView(this, mContext);
+        wifiBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //	wifi!=end=!微信支付!=end=!支付宝支付!=end=!停车场
+                if (b){
+                    mStringMap.put("wifi","wifi");
+                }else {
+                    if (null != mStringMap && mStringMap.containsKey("wifi")){
+                        mStringMap.remove("wifi");
+                    }
+                }
+            }
+        });
+        wechatBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //	wifi!=end=!微信支付!=end=!支付宝支付!=end=!停车场
+                if (b){
+                    mStringMap.put("微信支付","微信支付");
+                }else {
+                    if (null != mStringMap && mStringMap.containsKey("微信支付")){
+                        mStringMap.remove("微信支付");
+                    }
+                }
+            }
+        });
+
+        alipayBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //	wifi!=end=!微信支付!=end=!支付宝支付!=end=!停车场
+                if (b){
+                    mStringMap.put("支付宝支付","支付宝支付");
+                }else {
+                    if (null != mStringMap && mStringMap.containsKey("支付宝支付")){
+                        mStringMap.remove("支付宝支付");
+                    }
+                }
+            }
+        });
+
+        parkingSpaceBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //	wifi!=end=!微信支付!=end=!支付宝支付!=end=!停车场
+                if (b){
+                    mStringMap.put("停车场","停车场");
+                }else {
+                    if (null != mStringMap && mStringMap.containsKey("停车场")){
+                        mStringMap.remove("停车场");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -130,14 +190,36 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
                          */
                         Map<String, String> map = Config.getMap(responseBody);
                         Map<String, String> data = JSONUtils.parseKeyAndValueToMap(map.get("data"));
+                        mHeadPath = data.get("organization_portrait");
+                        mBgPath = data.get("organization_cover");
+                        mVideoPath = data.get("promotional_video");
+                        mCoverPath = data.get("promotional_cover");
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+data.get("organization_portrait")).into(headImg);
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+data.get("organization_cover")).into(bgImg);
+                        GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+data.get("promotional_cover")).into(coverImg);
                         addressEdit.setText(data.get("organization_site"));
                         phoneEdit.setText(data.get("organization_service"));
                         nameEdit.setText(data.get("organization_name"));
                         timeEdit.setText(data.get("organization_business_hours"));
                         storeBriefEdit.setText(data.get("organization_synopsis"));
                         danceTypeEdit.setText(data.get("organization_type"));
+                        String organization_facility = data.get("organization_facility");
+                        if (null != organization_facility){
+                            if (organization_facility.contains("微信支付")){
+                                wechatBox.setChecked(true);
+                            }
+                            if (organization_facility.contains("支付宝支付")){
+                                alipayBox.setChecked(true);
+                            }
+                            if (organization_facility.contains("停车场")){
+                                parkingSpaceBox.setChecked(true);
+                            }
+                            if (organization_facility.contains("wifi")){
+                                wifiBox.setChecked(true);
+                            }
+
+                        }
+
                     }
 
                     @Override
@@ -189,6 +271,14 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
 
 
     private void confirm() {
+        Set<String> set = mStringMap.keySet();
+        Iterator<String> iterator = set.iterator();
+        StringBuilder builder = new StringBuilder();
+        while (iterator.hasNext()){
+            String next = iterator.next();
+            builder.append(mStringMap.get(next));
+            builder.append("!=end=!");
+        }
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("user_token", ApiConfig.getToken());
@@ -197,7 +287,7 @@ public class EditOrganizationAty extends BaseAty  implements  UpLoadContract.Vie
         requestMap.put("organization_name", nameEdit.getContent());
         requestMap.put("organization_site", addressEdit.getContent());
         requestMap.put("organization_service", phoneEdit.getContent());
-        requestMap.put("organization_facility", "");
+        requestMap.put("organization_facility", builder.toString());
         requestMap.put("organization_business_hours", timeEdit.getContent());
         requestMap.put("organization_synopsis", storeBriefEdit.getContent());
         requestMap.put("organization_type", danceTypeEdit.getContent());
