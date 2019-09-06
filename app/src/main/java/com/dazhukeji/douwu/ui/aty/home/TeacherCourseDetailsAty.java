@@ -165,13 +165,14 @@ public class TeacherCourseDetailsAty extends BaseAty {
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_photo")).circleCrop().into(headImg);
                         titleTv.setText(curriculum.get("curriculum_name"));
 
-//                        if (Double.parseDouble(curriculum.get("curriculum_effective")) == 1) {
-//                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000长期有效");
-//                        } else {
-//                            long curriculum_start_time = Long.parseLong(curriculum.get("curriculum_start_time"));
-//                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"));
-//                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
-//                        }
+                        if (Double.parseDouble(curriculum.get("curriculum_effective")) == 1) {
+                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000长期课程");
+                        } else {
+                            long curriculum_start_time = Long.parseLong(curriculum.get("curriculum_start_time"))*1000;
+                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"))*1000;
+                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "yyyy年MM月dd日") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "yyyy年MM月dd日"));
+                        }
+//                        nameTv.setText(curriculum.get("curriculum_admin") +"\u3000"+curriculum.get("curriculum_name") );
                         if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_introduce_picture")){
                             videoplayer.setUp(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_video")
                                     , "", Jzvd.SCREEN_WINDOW_NORMAL);
@@ -181,7 +182,7 @@ public class TeacherCourseDetailsAty extends BaseAty {
                         difficultyTv.setText(curriculum.get("curriculum_difficulty"));
                         numTv.setText(curriculum.get("curriculum_buy_number") + "人购买");
                         courseDetailsTv.setText(curriculum.get("curriculum_details"));
-//                        phoneTv.setText(curriculum.get("organization_service"));
+                        phoneTv.setText(curriculum.get("curriculum_service"));
 
                         priceTv.setText(curriculum.get("curriculum_actual_price"));
 

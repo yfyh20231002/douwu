@@ -10,9 +10,11 @@ import com.dazhukeji.douwu.R;
 import com.dazhukeji.douwu.api.ApiService;
 import com.dazhukeji.douwu.api.Config;
 import com.dazhukeji.douwu.base.BaseAty;
+import com.dazhukeji.douwu.ui.aty.LoginAty;
 import com.dazhukeji.douwu.ui.aty.mine.MemberChatDetailsAty;
 import com.zhangyunfei.mylibrary.http.ApiConfig;
 import com.zhangyunfei.mylibrary.http.RetrofitHelper;
+import com.zhangyunfei.mylibrary.utils.DateUtils;
 import com.zhangyunfei.mylibrary.utils.GlideApp;
 import com.zhangyunfei.mylibrary.utils.JSONUtils;
 import com.zhangyunfei.mylibrary.utils.StringUtils;
@@ -159,15 +161,15 @@ public class CourseDetailsAty extends BaseAty {
                         GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + curriculum.get("curriculum_photo")).circleCrop().into(headImg);
                         titleTv.setText(curriculum.get("curriculum_name"));
 
-//                        if (Double.parseDouble(curriculum.get("curriculum_effective")) == 1) {
-//                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000长期有效");
-//                        } else {
-//                            long curriculum_start_time = Long.parseLong(curriculum.get("curriculum_start_time"));
-//                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"));
-//                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
-//                        }
+                        if (Double.parseDouble(curriculum.get("curriculum_effective")) == 1) {
+                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000长期课程");
+                        } else {
+                            long curriculum_start_time = Long.parseLong(curriculum.get("curriculum_start_time"))*1000;
+                            long curriculum_over_time = Long.parseLong(curriculum.get("curriculum_over_time"))*1000;
+                            nameTv.setText(curriculum.get("curriculum_admin") + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "yyyy年MM月dd日") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "yyyy年MM月dd日"));
+                        }
 
-                        nameTv.setText(curriculum.get("curriculum_admin") +"\u3000"+curriculum.get("curriculum_name") );
+//                        nameTv.setText(curriculum.get("curriculum_admin") +"\u3000"+curriculum.get("curriculum_name") );
                         if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_photo")){
                             videoplayer.setUp(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_video")
                                     , "", Jzvd.SCREEN_WINDOW_NORMAL);
@@ -211,11 +213,13 @@ public class CourseDetailsAty extends BaseAty {
                 cancelState(2);
                 break;
             case R.id.letterImg:
-                if (!StringUtils.isEmpty(mUserName)){
+                if (!StringUtils.isEmpty(ApiConfig.getToken()) && !StringUtils.isEmpty(mUserName)){
                     Conversation singleConversation = Conversation.createSingleConversation(mUserName, Config.getAppkey());
                     Bundle bundle = new Bundle();
                     bundle.putString("targetId",singleConversation.getTargetId());
                     startActivity(MemberChatDetailsAty.class,bundle);
+                }else {
+                    startActivity(LoginAty.class);
                 }
                 break;
             case R.id.price_linearLayout:

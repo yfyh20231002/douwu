@@ -140,12 +140,12 @@ public class TeacherCourseManageAty extends BaseAty {
                             mCourseAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                                 @Override
                                 public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                                    if (view.getId() == R.id.contentLayout ){
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
-                                        bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
-                                        startActivity(TeacherCourseDetailsAty.class, bundle);
-                                    }
+//                                    if (view.getId() == R.id.contentLayout ){
+//                                        Bundle bundle = new Bundle();
+//                                        bundle.putString("user_teacher_id", arrayList.get(position).get("user_teacher_id"));
+//                                        bundle.putString("curriculum_id", arrayList.get(position).get("curriculum_id"));
+//                                        startActivity(TeacherCourseDetailsAty.class, bundle);
+//                                    }
                                     if (view.getId() == R.id.stateTv ){
                                         caozuo("2",arrayList.get(position).get("curriculum_id"));
                                     }
