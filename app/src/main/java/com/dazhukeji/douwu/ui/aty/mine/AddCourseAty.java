@@ -167,6 +167,14 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
                 }
             }
         });
+        Calendar startDate = Calendar.getInstance();
+        startYear.setText(String.valueOf(startDate.get(Calendar.YEAR)));
+        startMonth.setText(String.valueOf(startDate.get(Calendar.MONTH) + 1));
+        startDay.setText(String.valueOf(startDate.get(Calendar.DAY_OF_MONTH)));
+
+        endYear.setText(String.valueOf(startDate.get(Calendar.YEAR)));
+        endMonth.setText(String.valueOf(startDate.get(Calendar.MONTH) + 1));
+        endDay.setText(String.valueOf(startDate.get(Calendar.DAY_OF_MONTH)));
     }
 
     /**
@@ -248,6 +256,22 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
         }
     }
 
+    /**
+     * 获取当天0点时间
+     * @return
+     * @author sixmonth
+     * @date 2019年6月5日
+     *
+     */
+    public  String getDate(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);//控制时
+        cal.set(Calendar.MINUTE, 0);//控制分
+        cal.set(Calendar.SECOND, 0);//控制秒
+        long time = cal.getTime().getTime()/1000;
+        return String.valueOf(time);
+    }
+
     private void confirm() {
         if (StringUtils.isEmpty(courseTeacherEdit.getContent()) || StringUtils.isEmpty(courseNameEdit.getContent())
                 || StringUtils.isEmpty(imgPath)
@@ -269,8 +293,8 @@ public class AddCourseAty extends BaseAty implements DanceTypeContract.View, UpL
         map.put("curriculum_actual_price", coursePriceEdit.getContent());
         map.put("curriculum_difficulty", mDifficulty);
         map.put("curriculum_effective", mStatus);
-        map.put("curriculum_start_time", mStartDate);
-        map.put("curriculum_over_time", mEndDate);
+        map.put("curriculum_start_time", getDate());
+        map.put("curriculum_over_time", getDate());
         if (mTitleList != null) {
             map.put("dance_type_id", String.valueOf(dance_type_id));
         }
