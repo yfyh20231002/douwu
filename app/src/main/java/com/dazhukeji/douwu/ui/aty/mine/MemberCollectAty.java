@@ -295,9 +295,9 @@ public class MemberCollectAty extends BaseAty<MineCollectPresenter> implements M
                 if (Double.parseDouble(item.getCurriculum_effective()) == 1) {
                     helper.setText(R.id.adminTv, item.getCurriculum_admin() + "\u3000长期有效");
                 } else {
-                    long curriculum_start_time = Long.parseLong(item.getCurriculum_start_time());
-                    long curriculum_over_time = Long.parseLong(item.getCurriculum_over_time());
-                    helper.setText(R.id.adminTv, item.getCurriculum_admin() + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
+                    long curriculum_start_time = Long.parseLong(item.getCurriculum_start_time())*1000;
+                    long curriculum_over_time = Long.parseLong(item.getCurriculum_over_time())*1000;
+                    helper.setText(R.id.adminTv, item.getCurriculum_admin() + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "yyyy年MM月dd日") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "yyyy年MM月dd日"));
                 }
             }
             helper.setText(R.id.difficultyTv, item.getCurriculum_difficulty());

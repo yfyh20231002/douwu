@@ -15,7 +15,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dazhukeji.douwu.R;
@@ -420,20 +419,34 @@ public class VideoAty extends BaseAty<SplendidVideoPresenter> implements Splendi
                     GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + organization_portrait).circleCrop().into(headImg);
                 }
                 helper.setText(R.id.contentTv, item.getOrganization_name());
-            } else if (file_category == 4) {
+            } else {
                 String file_cover = item.getFile_cover();
                 if (!TextUtils.isEmpty(file_cover)) {
                     ImageView coverImg = helper.getView(R.id.coverImg);
-                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + file_cover).diskCacheStrategy(DiskCacheStrategy.NONE).into(coverImg);
+                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + file_cover).into(coverImg);
                 }
-                String user_portrait = item.getUser_portrait();
-                if (!TextUtils.isEmpty(user_portrait)) {
+                String organization_portrait = item.getOrganization_portrait();
+                if (!TextUtils.isEmpty(organization_portrait)) {
                     ImageView headImg = helper.getView(R.id.head_img);
-                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + user_portrait).circleCrop().into(headImg);
+                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + organization_portrait).circleCrop().into(headImg);
                 }
-
-                helper.setText(R.id.contentTv, item.getUser_name());
+                helper.setText(R.id.contentTv, item.getOrganization_name());
             }
+
+//            else if (file_category == 4) {
+//                String file_cover = item.getFile_cover();
+//                if (!TextUtils.isEmpty(file_cover)) {
+//                    ImageView coverImg = helper.getView(R.id.coverImg);
+//                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + file_cover).diskCacheStrategy(DiskCacheStrategy.NONE).into(coverImg);
+//                }
+//                String user_portrait = item.getUser_portrait();
+//                if (!TextUtils.isEmpty(user_portrait)) {
+//                    ImageView headImg = helper.getView(R.id.head_img);
+//                    GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + user_portrait).circleCrop().into(headImg);
+//                }
+//
+//                helper.setText(R.id.contentTv, item.getUser_name());
+//            }
 
         }
     }

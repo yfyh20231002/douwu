@@ -128,6 +128,7 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
     private int mInvitation_id;
     private boolean mIsShow;
     private int attention_state = -1;
+    private TeacherAdapter mTeacherAdapter;
 
     @Override
     public int getLayoutId() {
@@ -307,21 +308,47 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
         if (!StringUtils.isEmpty(curriculum)) {
             mChildCourseAdapter = new CourseAdapter(R.layout.child_course_item, curriculum);
             courseChildRecyclerView.setAdapter(mChildCourseAdapter);
+            mChildCourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("organization_id", mOrganization_id);
+                    bundle.putString("curriculum_id", String.valueOf(curriculum.get(position).getCurriculum_id()));
+                    startActivity(DanceCourseDetailsAty.class, bundle);
+                }
+            });
         }
 
 
         List<OrganizationFindBean.DataBean.OrganizationTeacherBean> organization_teacher = GsonUtil.getObjectList(data.get("organization_teacher"), OrganizationFindBean.DataBean.OrganizationTeacherBean.class);
-        if (!StringUtils.isEmpty(organization_teacher)) {
-            teacherRecyclerView.setAdapter(new TeacherAdapter(R.layout.teacher_item, organization_teacher, mContext));
+        if (null != organization_teacher) {
+            mTeacherAdapter = new TeacherAdapter(R.layout.teacher_item, organization_teacher, mContext);
+            teacherRecyclerView.setAdapter(mTeacherAdapter);
+            mTeacherAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("organization_id", mOrganization_id);
+                    bundle.putString("organization_teacher_id", String.valueOf(organization_teacher.get(position).getOrganization_teacher_id()));
+                    startActivity(DanceTeacherDetailsAty.class, bundle);
+                }
+            });
         }
 
         mList.clear();
         List<OrganizationFindBean.DataBean.VideosBean> videos = GsonUtil.getObjectList(data.get("videos"), OrganizationFindBean.DataBean.VideosBean.class);
         mList.addAll(videos);
-        if (!StringUtils.isEmpty(mList)) {
-            mVideoAdpater = new VideoAdpater(R.layout.video_item, mList, mContext);
-            videoRecyclerView.setAdapter(mVideoAdpater);
-        }
+        mVideoAdpater = new VideoAdpater(R.layout.video_item, mList, mContext);
+        videoRecyclerView.setAdapter(mVideoAdpater);
+        mVideoAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("file_id", String.valueOf(mList.get(position).getFile_id()));
+                bundle.putString("fileType", "1");
+                startActivity(VideoDetailsAty.class, bundle);
+            }
+        });
     }
 
     private void setGroupDevice(OrganizationFindBean.DataBean.BasicBean basic) {
@@ -362,9 +389,9 @@ public class DanceOrgDetailsAty extends BaseAty<OrganizationDetailsPresenter> im
             ImageView headImg = helper.getView(R.id.head_img);
             headImg.setVisibility(View.GONE);
             helper.setText(R.id.courseNameTv, item.getCurriculum_name());
-            long curriculum_start_time = item.getCurriculum_start_time();
-            long curriculum_over_time = item.getCurriculum_over_time();
-            helper.setText(R.id.adminTv, item.getCurriculum_admin() + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "HH:mm") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "HH:mm"));
+            long curriculum_start_time = item.getCurriculum_start_time()*1000;
+            long curriculum_over_time = item.getCurriculum_over_time()*1000;
+            helper.setText(R.id.adminTv, item.getCurriculum_admin() + "\u3000" + DateUtils.stampToDate(curriculum_start_time, "yyyy年MM月dd日") + "\u0020-\u0020" + DateUtils.stampToDate(curriculum_over_time, "yyyy年MM月dd日"));
             helper.setText(R.id.difficultyTv, item.getCurriculum_difficulty());
             helper.setText(R.id.priceTv, String.valueOf(item.getCurriculum_actual_price()));
         }

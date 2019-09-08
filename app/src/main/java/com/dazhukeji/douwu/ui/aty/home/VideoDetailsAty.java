@@ -76,7 +76,7 @@ public class VideoDetailsAty extends BaseAty {
 
     private RecyclerViewManager mRecyclerViewManager;
     private String mFile_id;
-    private String mFileType;
+    private String mFileType = "1";
 
     private ArrayList<Map<String, String>> mCommentsList = new ArrayList<>();
 
