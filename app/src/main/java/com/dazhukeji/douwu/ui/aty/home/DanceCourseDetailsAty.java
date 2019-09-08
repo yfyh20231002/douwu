@@ -99,9 +99,9 @@ public class DanceCourseDetailsAty extends BaseAty {
         mCurriculum_id = getIntent().getStringExtra("curriculum_id");
         mOrganization_id = getIntent().getStringExtra("organization_id");
 
-        videoplayer.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4"
-                , "", Jzvd.SCREEN_WINDOW_NORMAL);
-        GlideApp.with(this).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(videoplayer.thumbImageView);
+//        videoplayer.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4"
+//                , "", Jzvd.SCREEN_WINDOW_NORMAL);
+//        GlideApp.with(this).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(videoplayer.thumbImageView);
     }
 
     @Override
@@ -160,12 +160,9 @@ public class DanceCourseDetailsAty extends BaseAty {
                         Map<String, String> map = Config.getMap(responseBody);
                         Map<String, String> data = JSONUtils.parseKeyAndValueToMap(map.get("data"));
                         if (data.containsKey("jmphone")){
-//                            Map<String, String> jmphone = JSONUtils.parseKeyAndValueToMap(data.get("jmphone"));
-//                            if (jmphone.containsKey("user_phone")){
-//                                mUserName = jmphone.get("user_phone");
-//                            }
-                            if (data.containsKey("jmphone")){
-                                mUserName = data.get("jmphone");
+                            Map<String, String> jmphone = JSONUtils.parseKeyAndValueToMap(data.get("jmphone"));
+                            if (jmphone.containsKey("user_phone")){
+                                mUserName = jmphone.get("user_phone");
                             }
                         }
                         Map<String, String> curriculum = JSONUtils.parseKeyAndValueToMap(data.get("curriculum"));
@@ -186,6 +183,13 @@ public class DanceCourseDetailsAty extends BaseAty {
                         phoneTv.setText(curriculum.get("organization_service"));
 
                         priceTv.setText(curriculum.get("curriculum_actual_price"));
+
+                        if (curriculum.containsKey("curriculum_video") && curriculum.containsKey("curriculum_introduce_picture")){
+                            videoplayer.setUp(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_video")
+                                    , "", Jzvd.SCREEN_WINDOW_NORMAL);
+                            GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL+curriculum.get("curriculum_introduce_picture")).into(videoplayer.thumbImageView);
+
+                        }
 
                         exChangeCollectState(data);
 

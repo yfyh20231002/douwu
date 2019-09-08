@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -114,7 +115,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
     private List<DanceTypeBean.DataBean> titleList = new ArrayList<>();
     private List<String> imagesList = new ArrayList<>();
     private List<VideoBean> mVideoBeanList = new ArrayList<>();
-    private List<DistrictBean> mDistrictBeanList=new ArrayList<>();
+    private List<DistrictBean> mDistrictBeanList = new ArrayList<>();
 
 
     private HomeClassifyAdapter mClassifyAdapter;
@@ -198,7 +199,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 int lastVisibleItemPosition = gridLayoutManager.findLastVisibleItemPosition();
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition + 1 == mVideoAdpater.getItemCount()) {
                     p++;
-//                    ((HomePresenter) mPresenter).postIndexPaging(dance_type_id, district_id, order, p);
+                    //                    ((HomePresenter) mPresenter).postIndexPaging(dance_type_id, district_id, order, p);
                     requestData();
                 }
             }
@@ -217,9 +218,9 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 return false;
             }
         });
-//        mDanceTypePresenter = new DanceTypePresenter();
-//        mDanceTypePresenter.attachView(this,mContext);
-//        mDanceTypePresenter.postDanceTypeSelect();
+        //        mDanceTypePresenter = new DanceTypePresenter();
+        //        mDanceTypePresenter.attachView(this,mContext);
+        //        mDanceTypePresenter.postDanceTypeSelect();
         chooseCity();
     }
 
@@ -257,7 +258,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
 
     @Override
     protected void requestData() {
-//        ((HomePresenter) mPresenter).postHome(dance_type_id, district_id, order,searchEdit.getContent());
+        //        ((HomePresenter) mPresenter).postHome(dance_type_id, district_id, order,searchEdit.getContent());
         ApiService apiService = RetrofitHelper.getInstance().create(ApiService.class);
         Map<String, String> requestMap = new HashMap<>();
         requestMap.put("dance_type_id", dance_type_id);
@@ -317,7 +318,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
             case R.id.location_tv:
-                if (mDistrictBeanList.size()>0){
+                if (mDistrictBeanList.size() > 0) {
                     setCity();
                 }
                 break;
@@ -334,14 +335,14 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 setPic();
                 bundle.putString("type", "video");
                 bundle.putString("from", "home");
-                bundle.putString("district_id",district_id);
+                bundle.putString("district_id", district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
             case R.id.pic_img:
                 setPic();
                 bundle.putString("type", "image");
                 bundle.putString("from", "home");
-                bundle.putString("district_id",district_id);
+                bundle.putString("district_id", district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
             case R.id.lewu_img:
@@ -351,7 +352,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
                 setPic();
                 bundle.putString("type", "music");
                 bundle.putString("from", "home");
-                bundle.putString("district_id",district_id);
+                bundle.putString("district_id", district_id);
                 startActivity(PublishVideoAty.class, bundle);
                 break;
         }
@@ -373,7 +374,7 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
         List<City> cityList = new ArrayList<>();
         for (int i = 0; i < mDistrictBeanList.size(); i++) {
             DistrictBean districtBean = mDistrictBeanList.get(i);
-            City city=new City(districtBean.getDistrict_name(),"","",String.valueOf(districtBean.getDistrict_id()));
+            City city = new City(districtBean.getDistrict_name(), "", "", String.valueOf(districtBean.getDistrict_id()));
             cityList.add(city);
         }
         CityPicker.getInstance()
@@ -502,12 +503,12 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
             mVideoBeanList.clear();
         }
         imagesList.clear();
-//        mDistrictBeanList.clear();
+        //        mDistrictBeanList.clear();
         mCurrentRegion = JSONUtils.parseKeyAndValueToMap(data.get("current_region"));
         district_id = mCurrentRegion.get("district_id");
         locationTv.setText(mCurrentRegion.get("district_name"));
-//        List<DistrictBean> district = data.getDistrict();
-//        mDistrictBeanList.addAll(district);
+        //        List<DistrictBean> district = data.getDistrict();
+        //        mDistrictBeanList.addAll(district);
 
         List<DanceTypeBean.DataBean> dance_type = JSONUtils.parseKeyAndValueToMapList(DanceTypeBean.DataBean.class, data.get("dance_type"));
         titleList.clear();
@@ -546,20 +547,29 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
             mVideoBeanList.addAll(videoBeans);
         }
         MyLogger.printJsonOfError(videoBeans);
-        if (mVideoBeanList.size() > 0) {
-            mVideoAdpater = new VideoAdpater(R.layout.video_item, mVideoBeanList, mContext);
-            video_recyclerView.setAdapter(mVideoAdpater);
-            mVideoAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("file_id", String.valueOf(mVideoBeanList.get(position).getFile_id()));
-                    bundle.putString("fileType", "1");
-                    startActivity(VideoDetailsAty.class, bundle);
-                }
-            });
+        mVideoAdpater = new VideoAdpater(R.layout.video_item, mVideoBeanList, mContext);
+        video_recyclerView.setAdapter(mVideoAdpater);
+        mVideoAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("file_id", String.valueOf(mVideoBeanList.get(position).getFile_id()));
+                bundle.putString("fileType", "1");
+                startActivity(VideoDetailsAty.class, bundle);
+            }
+        });
+
+        if (mVideoBeanList.size() == 0){
+           showDialog();
         }
 
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("暂无此类视频");
+        builder.setPositiveButton("确定", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
     }
 
 
@@ -582,16 +592,16 @@ public class HomeFragment extends BaseFgt<HomePresenter> {
         mBanner.start();
     }
 
-//    public void loadMore(HomeIndexPagingBean homeIndexPagingBean) {
-//        mVideoAdpater.addData(homeIndexPagingBean.getData().getVideo());
-//    }
+    //    public void loadMore(HomeIndexPagingBean homeIndexPagingBean) {
+    //        mVideoAdpater.addData(homeIndexPagingBean.getData().getVideo());
+    //    }
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        if (mDanceTypePresenter != null){
-//            mDanceTypePresenter.detachView();
-//        }
+        //        if (mDanceTypePresenter != null){
+        //            mDanceTypePresenter.detachView();
+        //        }
     }
 }
