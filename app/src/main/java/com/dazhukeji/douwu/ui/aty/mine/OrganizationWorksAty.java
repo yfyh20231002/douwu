@@ -49,7 +49,7 @@ import okhttp3.ResponseBody;
 /**
  * 创建者：zhangyunfei
  * 创建时间：2019/1/16 16:07
- * 功能描述：老师作品
+ * 功能描述：机构作品
  */
 public class OrganizationWorksAty extends BaseAty {
     @BindView(R.id.txt_title)
@@ -314,7 +314,7 @@ public class OrganizationWorksAty extends BaseAty {
                 ImageView coverImg = helper.getView(R.id.coverImg);
                 GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + file_cover).diskCacheStrategy(DiskCacheStrategy.NONE).into(coverImg);
             }
-            String user_portrait = item.get("teacher_portrait");
+            String user_portrait = item.get("organization_portrait");
             if (!TextUtils.isEmpty(user_portrait)) {
                 ImageView headImg = helper.getView(R.id.head_img);
                 GlideApp.with(mContext).load(ApiConfig.BASE_IMG_URL + user_portrait).circleCrop().into(headImg);
